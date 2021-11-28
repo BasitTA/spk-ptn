@@ -5,10 +5,13 @@
 @endsection
 
 @section('content')
-    <h2>{{ $siswas["nama"] }}</h2>
-    <h5>{{ $siswas["jk"] }}</h5>
-    <h5>{{ $siswas["ttl"] }}</h5>
-    <h5>{{ $siswas["alamat"] }}</h5>
+    <div class="col-lg-10">
+        <h2>{{ $students['name'] }}</h2>
+        <h5>{{ $students['gender'] }}</h5>
+        <h5>{{ $students['place_of_birth'] }}</h5>
+        {{-- <h5>{{ $students['date_of_birth'] }}</h5>
+        <h5>{{ $students['address'] }}</h5> --}}
 
-    <a href="/">Kembali</a>
+        <a href="/">Kembali</a>
+    </div>
 @endsection
