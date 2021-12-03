@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
-class Kriteria{
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Kriteria extends Model{
     static $data_kriterias = [
         [
             "kode" => "C1",
@@ -165,7 +168,7 @@ class Kriteria{
         // ],
     ];
 
-    public static function all(){
-        return self::$data_kriterias;
-    } 
+    // public static function all(){
+    //     return self::$data_kriterias;
+    // } 
 }

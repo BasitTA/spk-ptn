@@ -31,11 +31,11 @@
                         <tbody>
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $siswa['nama'] }}</td>
-                                <td>{{ $siswa['jk'] }}</td>
-                                <td>{{ $siswa['ttl'] }}</td>
+                                <td>{{ $siswa->nama }}</td>
+                                <td>{{ $siswa->jk }}</td>
+                                <td>{{ $siswa->ttl }}</td>
                                 <td>
-                                    <a class="" href="/siswa/daftarsiswa/{{ $siswa['id'] }}">Lihat</a>
+                                    <a class="" href="/siswa/detailSiswa/{{ $siswa->id }}">Lihat</a>
                                     <a class="">Edit</a>
                                     <a class="">Delete</a>
                                 </td>

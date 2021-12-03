@@ -3,6 +3,8 @@
 use App\Models\Siswa;
 use App\Models\Kriteria;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\KriteriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,37 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('siswa',[
-        "title" => "Siswa",
-        "siswas" => Siswa::all() 
-    ]);
-});
+Route::get('/', [SiswaController::class, 'index']);
 
-Route::get('/siswa', function () {
-    return view('siswa',[
-        "title" => "Siswa",
-        "siswas" => Siswa::all() 
-    ]);
-});
+Route::get('/siswa', [SiswaController::class, 'index']);
 
-Route::get('/kriteria', function () {
-    return view('kriteria',[
-        "title" => "Kriteria",
-        "kriterias" => Kriteria::all()
-    ]);
-});
+// Route::get('/kriteria', [KriteriaController::class, 'index']);
 
+Route::get('/siswa/detailSiswa/{id}', [SiswaController::class, 'show']);
 
-Route::get('/hasilperhitungan', function () {
-    return view('hasilPerhitungan',[
-        "title" => "Hasil Perhitungan"
-    ]);
-});
-
-Route::get('/siswa/daftarsiswa/{id}', function($id){
-    return view('showDaftarSiswa',[
-        "title" => "Calon Siswa",
-        "siswas" => Siswa::find($id)
-    ]);
-});
+// Route::get('/hasil', [HasilController::class, 'index']);
