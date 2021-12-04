@@ -21,7 +21,7 @@ Route::get('/', [SiswaController::class, 'index']);
 
 Route::get('/siswa', [SiswaController::class, 'index']);
 
-// Route::get('/kriteria', [KriteriaController::class, 'index']);
+Route::get('/kriteria', [KriteriaController::class, 'index']);
 
 Route::get('/siswa/detailSiswa/{id}', [SiswaController::class, 'show']);
 
