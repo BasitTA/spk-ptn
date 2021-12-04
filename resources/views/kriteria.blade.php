@@ -5,15 +5,16 @@
 @endsection
 
 @section('content')
-    <div class="row col-lg-10 g-0 bg-secondary">
+    <div class="row col-lg-10 g-0 bg-secondary px-2 py-2">
         {{-- Table 1 --}}
         @foreach ($kriterias as $kriteria)
-            <div class="col-lg-6 col-md-6 bg-secondary  mt-3">
-                <div class="bg-light mx-2">
+            <div class="col-lg-6 col-md-6">
+                <div class="bg-light mx-2 my-2">
                     {{-- Header --}}
                     <div class="mx-3">
                         <div class="pt-3 d-flex justify-content-between">
-                            <h5 class="my-0 align-self-center text-dark inliner">{{ $kriteria->nama }} (<i>{{ $kriteria->kode }}</i>)</h5>
+                            <h5 class="my-0 align-self-center text-dark inliner">{{ $kriteria->nama }}
+                                (<i>{{ $kriteria->kode }}</i>)</h5>
                             <a href="" type="button" class="align-self-center btn btn-sm btn-warning">Ubah Data</a>
                         </div>
                     </div>

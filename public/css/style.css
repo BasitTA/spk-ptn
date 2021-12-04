@@ -1,7 +1,7 @@
-.wrapper{
+/* .wrapper{
     height: 100%;
-}
+} */
 
-.inliner{
-    display: inline;
+a{
+    text-decoration :none;
 }

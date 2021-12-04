@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="d-block col-lg-10 px-5 py-4">
+    <div class="d-block col-lg-10 px-4 py-4">
         {{-- Header --}}
         <div class="mb-3">
             <h3 class="mb-0">{{ $siswas->nama }}</h3>

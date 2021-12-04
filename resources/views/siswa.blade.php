@@ -5,17 +5,15 @@
 @endsection
 
 @section('content')
-    <div class="col-lg-10 bg-secondary">
+    <div class="col-lg-10 bg-secondary px-3 py-3 g-0">
         {{-- Daftar Siswa --}}
-        <div class="mx-2 bg-light pb-1">
-            <div class="mt-3 ms-3">
-                <div class="pt-3">
-                    <h4 class="text-dark inliner">Daftar Siswa</h4>
-                    <button type="button" class="btn btn-sm btn-success">Tambah Data</button>
-                </div>
-                <a class="link-info" href="#">Daftar Siswa</a>
+        <div class="bg-light mb-3">
+            <div class="pt-3 mx-3 justify-content-between d-flex">
+                <h5 class="my-0 align-self-center text-dark">Daftar Siswa</h5>
+                <a type="button" class="align-self-center btn btn-sm btn-success">Tambah Data</a>
             </div>
-            <div class="mt-1 mx-3 bg-light table-responsive">
+            <a class="ms-3 link-info" href="#">Daftar Siswa ></a>
+            <div class="mt-3 mx-3 bg-light table-responsive">
                 <table class="table table-striped">
                     <thead class="table-success">
                         <tr>
@@ -46,15 +44,13 @@
             </div>
         </div>
         {{-- Nilai Siswa --}}
-        <div class="mx-2 bg-light pb-1">
-            <div class="mt-3 ms-3">
-                <div class="pt-3">
-                    <h4 class="text-dark inliner">Nilai Siswa</h4>
-                    <button type="button" class="btn btn-sm btn-success">Tambah Data</button>
-                </div>
-                <a class="link-info" href="#">Nilai Siswa</a>
+        <div class="bg-light">
+            <div class="pt-3 mx-3 justify-content-between d-flex">
+                <h5 class="my-0 align-self-center text-dark">Nilai Siswa</h5>
+                <a type="button" class="align-self-center btn btn-sm btn-success">Tambah Data</a>
             </div>
-            <div class="mt-1 mx-3 bg-light table-responsive">
+            <a class="ms-3 link-info" href="#">Nilai Siswa ></a>
+            <div class="mt-3 mx-3 bg-light table-responsive">
                 <table class="table table-striped">
                     <thead class="table-success">
                         <tr>
