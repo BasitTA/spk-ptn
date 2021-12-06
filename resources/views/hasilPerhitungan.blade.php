@@ -10,7 +10,7 @@
         <div class="bg-light pb-2">
             <div class="mt-3 ms-3">
                 <div class="pt-3">
-                    <h4 class="text-dark inliner">Daftar Siswa</h4>
+                    <h4 class="text-dark">Daftar Siswa</h4>
                     <button type="button" class="btn btn-sm btn-success">Tambah Data</button>
                 </div>
                 <a class="link-info" href="#">Daftar Siswa</a>

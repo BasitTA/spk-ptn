@@ -15,7 +15,7 @@ class CreateKriteriasTable extends Migration
     {
         Schema::create('kriterias', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
+            $table->string('kode')->unique();
             $table->string('nama');
             $table->json('pembobotan_kriteria');
             $table->timestamps();

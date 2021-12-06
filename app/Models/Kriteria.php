@@ -16,138 +16,138 @@ class Kriteria extends Model{
     ];
 
     // static $data_kriterias = [
-    //     [
-    //         "kode" => "C1",
-    //         "nama" => "Bacaan Quran",
-    //         "pembobotan_kriteria" => [
-    //             [
-    //                 "pilihan" => "90-100",
-    //                 "bobot" => "4" 
-    //             ],
-    //             [
-    //                 "pilihan" => "80-89",
-    //                 "bobot" => "3" 
-    //             ],
-    //             [
-    //                 "pilihan" => "65-79",
-    //                 "bobot" => "2" 
-    //             ],
-    //             [
-    //                 "pilihan" => "0-64",
-    //                 "bobot" => "1" 
-    //             ],
-    //         ],
-    //     ],
-    //     [
-    //         "kode" => "C2",
-    //         "nama" => "Hafalan Quran",
-    //         "pembobotan_kriteria" => [
-    //             [
-    //                 "pilihan" => "90-100",
-    //                 "bobot" => "4" 
-    //             ],
-    //             [
-    //                 "pilihan" => "80-89",
-    //                 "bobot" => "3" 
-    //             ],
-    //             [
-    //                 "pilihan" => "65-79",
-    //                 "bobot" => "2" 
-    //             ],
-    //             [
-    //                 "pilihan" => "0-64",
-    //                 "bobot" => "1" 
-    //             ],
-    //         ],
-    //     ],
-    //     [
-    //         "kode" => "C3",
-    //         "nama" => "Bacaan Shalat",
-    //         "pembobotan_kriteria" => [
-    //             [
-    //                 "pilihan" => "90-100",
-    //                 "bobot" => "4" 
-    //             ],
-    //             [
-    //                 "pilihan" => "80-89",
-    //                 "bobot" => "3" 
-    //             ],
-    //             [
-    //                 "pilihan" => "65-79",
-    //                 "bobot" => "2" 
-    //             ],
-    //             [
-    //                 "pilihan" => "0-64",
-    //                 "bobot" => "1" 
-    //             ],
-    //         ],
-    //     ],
-    //     [
-    //         "kode" => "C4",
-    //         "nama" => "Tes Kepribadian",
-    //         "pembobotan_kriteria" => [
-    //             [
-    //                 "pilihan" => "90-100",
-    //                 "bobot" => "4" 
-    //             ],
-    //             [
-    //                 "pilihan" => "80-89",
-    //                 "bobot" => "3" 
-    //             ],
-    //             [
-    //                 "pilihan" => "65-79",
-    //                 "bobot" => "2" 
-    //             ],
-    //             [
-    //                 "pilihan" => "0-64",
-    //                 "bobot" => "1" 
-    //             ],
-    //         ],
-    //     ],
-    //     [
-    //         "kode" => "C5",
-    //         "nama" => "Penghasilan Orang Tua",
-    //         "pembobotan_kriteria" => [
-    //             [
-    //                 "pilihan" => "< 1 JT",
-    //                 "bobot" => "4" 
-    //             ],
-    //             [
-    //                 "pilihan" => "1 JT - < 4.2 JT",
-    //                 "bobot" => "3" 
-    //             ],
-    //             [
-    //                 "pilihan" => "4.2 JT - 10 JT",
-    //                 "bobot" => "2" 
-    //             ],
-    //             [
-    //                 "pilihan" => "> 10 JT",
-    //                 "bobot" => "1" 
-    //             ],
-    //         ],
-    //     ],
-    //     [
-    //         "kode" => "C6",
-    //         "nama" => "Status",
-    //         "pembobotan_kriteria" => [
-    //             [
-    //                 "pilihan" => "Yatim & Piatu",
-    //                 "bobot" => "4" 
-    //             ],
-    //             [
-    //                 "pilihan" => "Yatim",
-    //                 "bobot" => "3" 
-    //             ],
-    //             [
-    //                 "pilihan" => "Piatu",
-    //                 "bobot" => "2" 
-    //             ],
-    //             [
-    //                 "pilihan" => "Orang Tua Lengkap",
-    //                 "bobot" => "1" 
-    //             ],
-    //         ],
-    //     ],
+        // [
+        //     "kode" => "C1",
+        //     "nama" => "Bacaan Quran",
+        //     "pembobotan_kriteria" => [
+        //         [
+        //             "pilihan" => "90-100",
+        //             "bobot" => "4" 
+        //         ],
+        //         [
+        //             "pilihan" => "80-89",
+        //             "bobot" => "3" 
+        //         ],
+        //         [
+        //             "pilihan" => "65-79",
+        //             "bobot" => "2" 
+        //         ],
+        //         [
+        //             "pilihan" => "0-64",
+        //             "bobot" => "1" 
+        //         ],
+        //     ],
+        // ],
+        // [
+        //     "kode" => "C2",
+        //     "nama" => "Hafalan Quran",
+        //     "pembobotan_kriteria" => [
+        //         [
+        //             "pilihan" => "90-100",
+        //             "bobot" => "4" 
+        //         ],
+        //         [
+        //             "pilihan" => "80-89",
+        //             "bobot" => "3" 
+        //         ],
+        //         [
+        //             "pilihan" => "65-79",
+        //             "bobot" => "2" 
+        //         ],
+        //         [
+        //             "pilihan" => "0-64",
+        //             "bobot" => "1" 
+        //         ],
+        //     ],
+        // ],
+        // [
+        //     "kode" => "C3",
+        //     "nama" => "Bacaan Shalat",
+        //     "pembobotan_kriteria" => [
+        //         [
+        //             "pilihan" => "90-100",
+        //             "bobot" => "4" 
+        //         ],
+        //         [
+        //             "pilihan" => "80-89",
+        //             "bobot" => "3" 
+        //         ],
+        //         [
+        //             "pilihan" => "65-79",
+        //             "bobot" => "2" 
+        //         ],
+        //         [
+        //             "pilihan" => "0-64",
+        //             "bobot" => "1" 
+        //         ],
+        //     ],
+        // ],
+        // [
+        //     "kode" => "C4",
+        //     "nama" => "Tes Kepribadian",
+        //     "pembobotan_kriteria" => [
+        //         [
+        //             "pilihan" => "90-100",
+        //             "bobot" => "4" 
+        //         ],
+        //         [
+        //             "pilihan" => "80-89",
+        //             "bobot" => "3" 
+        //         ],
+        //         [
+        //             "pilihan" => "65-79",
+        //             "bobot" => "2" 
+        //         ],
+        //         [
+        //             "pilihan" => "0-64",
+        //             "bobot" => "1" 
+        //         ],
+        //     ],
+        // ],
+        // [
+        //     "kode" => "C5",
+        //     "nama" => "Penghasilan Orang Tua",
+        //     "pembobotan_kriteria" => [
+        //         [
+        //             "pilihan" => "< 1 JT",
+        //             "bobot" => "4" 
+        //         ],
+        //         [
+        //             "pilihan" => "1 JT - < 4.2 JT",
+        //             "bobot" => "3" 
+        //         ],
+        //         [
+        //             "pilihan" => "4.2 JT - 10 JT",
+        //             "bobot" => "2" 
+        //         ],
+        //         [
+        //             "pilihan" => "> 10 JT",
+        //             "bobot" => "1" 
+        //         ],
+        //     ],
+        // ],
+        // [
+        //     "kode" => "C6",
+        //     "nama" => "Status",
+        //     "pembobotan_kriteria" => [
+        //         [
+        //             "pilihan" => "Yatim & Piatu",
+        //             "bobot" => "4" 
+        //         ],
+        //         [
+        //             "pilihan" => "Yatim",
+        //             "bobot" => "3" 
+        //         ],
+        //         [
+        //             "pilihan" => "Piatu",
+        //             "bobot" => "2" 
+        //         ],
+        //         [
+        //             "pilihan" => "Orang Tua Lengkap",
+        //             "bobot" => "1" 
+        //         ],
+        //     ],
+        // ],
         // [
         //     "nama" => "Basit",
         //     "c1" => "91",

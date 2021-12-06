@@ -9,10 +9,10 @@
         {{-- Daftar Siswa --}}
         <div class="bg-light mb-3">
             <div class="pt-3 mx-3 justify-content-between d-flex">
-                <h5 class="my-0 align-self-center text-dark">Daftar Siswa</h5>
+                <h5 class="my-0 align-self-center">Daftar Siswa</h5>
                 <a type="button" class="align-self-center btn btn-sm btn-success">Tambah Data</a>
             </div>
-            <a class="ms-3 link-info" href="#">Daftar Siswa ></a>
+            <a class="ms-3" href="#">Daftar Siswa ></a>
             <div class="mt-3 mx-3 bg-light table-responsive">
                 <table class="table table-striped">
                     <thead class="table-success">
@@ -46,10 +46,10 @@
         {{-- Nilai Siswa --}}
         <div class="bg-light">
             <div class="pt-3 mx-3 justify-content-between d-flex">
-                <h5 class="my-0 align-self-center text-dark">Nilai Siswa</h5>
+                <h5 class="my-0 align-self-center">Nilai Siswa</h5>
                 <a type="button" class="align-self-center btn btn-sm btn-success">Tambah Data</a>
             </div>
-            <a class="ms-3 link-info" href="#">Nilai Siswa ></a>
+            <a class="ms-3" href="#">Nilai Siswa ></a>
             <div class="mt-3 mx-3 bg-light table-responsive">
                 <table class="table table-striped">
                     <thead class="table-success">

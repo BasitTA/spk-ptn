@@ -17,6 +17,8 @@
                                 (<i>{{ $kriteria->kode }}</i>)</h5>
                             <a href="" type="button" class="align-self-center btn btn-sm btn-warning">Ubah Data</a>
                         </div>
+                        <a class="" href="/kriteria">Daftar Kriteria ></a>
+                        <a class="" href="">{{ $kriteria->nama }}</a>
                     </div>
                     {{-- Table --}}
                     <div class="mt-2 mx-3 bg-light table-responsive">
