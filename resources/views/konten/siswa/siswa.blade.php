@@ -47,7 +47,7 @@
         <div class="bg-light">
             <div class="pt-3 mx-3 justify-content-between d-flex">
                 <h5 class="my-0 align-self-center">Nilai Siswa</h5>
-                <a type="button" class="align-self-center btn btn-sm btn-success">Tambah Data</a>
+                <a href="/siswa/nilaisiswa" type="button" class="align-self-center btn btn-sm btn-success">Tambah Data</a>
             </div>
             <a class="ms-3" href="#">Nilai Siswa ></a>
             <div class="mt-3 mx-3 bg-light table-responsive">

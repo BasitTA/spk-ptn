@@ -10,4 +10,8 @@ class Siswa extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function kriteria(){
+        return $this->hasOne(Kriteria::class);
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKriteriasTable extends Migration
+class CreateNilaiSiswasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateKriteriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('kriterias', function (Blueprint $table) {
+        Schema::create('nilai_siswas', function (Blueprint $table) {
             $table->id();
-            // $table->integer('siswa_id');
-            // 'siswa_id' => $this->faker->randomDigit(),
-            $table->string('kode')->unique();
-            $table->string('nama');
-            $table->json('pembobotan_kriteria');
+            $table->string('nama_siswa');
+            $table->string('pilihan');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateKriteriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kriterias');
+        Schema::dropIfExists('nilai_siswas');
     }
 }

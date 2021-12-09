@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run(){
-        Siswa::factory(10)->create();
+        Siswa::factory(5)->create();
         // Siswa::create([
         //     'nama' => 'Basit',
         //     'jk' => 'L',
@@ -34,6 +34,33 @@ class DatabaseSeeder extends Seeder
         // //     'alamat' => 'jl.abc, bekasi'
         // ]);
 
+        // [
+        //     'nama' => 'Basit',
+        //     'c1' => '91',
+        //     'c2' => '90',
+        //     'c3' => '82',
+        //     'c4' => '88',
+        //     'c5' => '93',
+        //     'c6' => '87',
+        // ],
+        // [
+        //     'nama' => 'Bunga',
+        //     'c1' => '81',
+        //     'c2' => '90',
+        //     'c3' => '86',
+        //     'c4' => '80',
+        //     'c5' => '87',
+        //     'c6' => '89',
+        // ],
+        // [
+        //     'nama' => 'Abdul',
+        //     'c1' => '71',
+        //     'c2' => '80',
+        //     'c3' => '87',
+        //     'c4' => '89',
+        //     'c5' => '90',
+        //     'c6' => '92',
+        // ],
         Kriteria::create([
             'kode' => 'C1',
             'nama' => 'Bacaan Quran',

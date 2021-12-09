@@ -14,9 +14,9 @@ class KriteriaFactory extends Factory
     public function definition()
     {
         return [
-            'kode'=>$this->faker->randomElements(['C1','C2','C3','C4','C5']),
-            'nama'=>$this->faker->word(),
-            'pembobotan_kriteria'=>$this->faker->words()
+            // 'kode'=>$this->faker->randomElements(['C1','C2','C3','C4','C5']),
+            // 'nama'=>$this->faker->word(),
+            // 'pembobotan_kriteria'=>$this->faker->words()
         ];
     }
 }

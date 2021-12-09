@@ -8,7 +8,7 @@ use App\Models\Kriteria;
 class KriteriaController extends Controller
 {
     public function index(){
-        return view('kriteria',[
+        return view('konten/kriteria/kriteria',[
             "title" => "Kriteria",
             "kriterias" => Kriteria::all()
         ]);

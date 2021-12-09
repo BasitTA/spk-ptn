@@ -16,13 +16,14 @@ use App\Http\Controllers\KriteriaController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Siswa
 Route::get('/', [SiswaController::class, 'index']);
-
 Route::get('/siswa', [SiswaController::class, 'index']);
+Route::get('/siswa/detailSiswa/{id}', [SiswaController::class, 'show']);
+Route::get('/siswa/nilaisiswa', [SiswaController::class, 'createNilaiSiswa']);
 
+//Kriteria
 Route::get('/kriteria', [KriteriaController::class, 'index']);
 
-Route::get('/siswa/detailSiswa/{id}', [SiswaController::class, 'show']);
 
 // Route::get('/hasil', [HasilController::class, 'index']);
