@@ -11,7 +11,11 @@ class Siswa extends Model
 
     protected $guarded = ['id'];
 
-    public function kriteria(){
-        return $this->hasOne(Kriteria::class);
+    public function nilaiSiswa(){
+        return $this->hasOne(NilaiSiswa::class);
     }
+    
+    // public function kriteria(){
+    //     return $this->hasOne(Kriteria::class);
+    // }
 }

@@ -5,11 +5,11 @@
 @endsection
 
 @section('content')
-    <div class="row col-lg-10 g-0 bg-secondary px-2 py-2">
+    <div class="row col-lg-10 g-0 bg-light px-2 py-2">
         {{-- Table 1 --}}
         @foreach ($kriterias as $kriteria)
             <div class="col-lg-6 col-md-6">
-                <div class="bg-light mx-2 my-2">
+                <div class="mx-2 my-2 border rounded-2">
                     {{-- Header --}}
                     <div class="mx-3">
                         <div class="pt-3 d-flex justify-content-between">

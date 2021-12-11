@@ -11,11 +11,15 @@ class Kriteria extends Model{
 
     protected $guarded = ['id'];
 
-    protected$casts = [
+    protected $casts = [
         'pembobotan_kriteria' => 'array'
     ];
 
-    public function siswa(){
-        return $this->belongsToMany(Siswa::class);
+    public function nilaiSiswa(){
+        return $this->belongsTo(NilaiSiswa::class);
     }
+
+    // public function siswa(){
+    //     return $this->belongsToMany(Siswa::class);
+    // }
 }

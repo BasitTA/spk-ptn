@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Siswa;
 use App\Models\Kriteria;
+use App\Models\NilaiSiswa;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +16,43 @@ class DatabaseSeeder extends Seeder
      */
     public function run(){
         Siswa::factory(5)->create();
+
+        NilaiSiswa::create([
+            'nama' => 'Basit S.Kom',
+            'pilihan' => [
+                'a',
+                'b',
+                'c',
+                'd',
+                '1',
+                '2',
+            ],
+        ]);
+
+        NilaiSiswa::create([
+            'nama' => 'Bunga',
+            'pilihan' => [
+                'e',
+                'f',
+                'g',
+                'h',
+                '3',
+                '4'
+            ],
+        ]);
+        NilaiSiswa::create([
+            'nama' => 'Abdul',
+            'pilihan' => [
+                'i',
+                'j',
+                'k',
+                'l',
+                '5',
+                '6',
+            ],
+        ]);
+
+        // NilaiSiswa::factory(3)->create();
         // Siswa::create([
         //     'nama' => 'Basit',
         //     'jk' => 'L',

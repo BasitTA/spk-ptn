@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\NilaiSiswa;
 use App\Models\Kriteria;
 use App\Models\Siswa;
 
@@ -11,7 +12,8 @@ class SiswaController extends Controller
     public function index(){
         return view('konten/siswa/siswa',[
             "title" => "Siswa",
-            "siswas" => Siswa::all() 
+            "siswas" => Siswa::all(),
+            "nilai_siswas" => NilaiSiswa::all() 
         ]);
     }
 

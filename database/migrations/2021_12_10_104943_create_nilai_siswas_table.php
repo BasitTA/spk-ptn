@@ -15,8 +15,8 @@ class CreateNilaiSiswasTable extends Migration
     {
         Schema::create('nilai_siswas', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_siswa');
-            $table->string('pilihan');
+            $table->string('nama');
+            $table->json('pilihan');
             $table->timestamps();
         });
     }
