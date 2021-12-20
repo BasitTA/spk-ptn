@@ -12,8 +12,8 @@ class SiswaController extends Controller
     public function index(){
         return view('konten/siswa/siswa',[
             "title" => "Siswa",
-            "siswas" => Siswa::all(),
-            "nilai_siswas" => NilaiSiswa::all() 
+            "siswas" => Siswa::latest()->filter(request(['search']))->get(),
+            "nilai_siswas" => NilaiSiswa::latest()->get()
         ]);
     }
 

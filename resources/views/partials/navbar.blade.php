@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarRight">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Admin</a>
+                    <a class="nav-link text-light" href="/login"><i class="bi bi-box-arrow-in-right"></i> Login</a>
                 </li>
             </ul>
         </div>

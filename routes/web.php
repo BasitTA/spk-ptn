@@ -1,10 +1,11 @@
 <?php
 
-use App\Models\Siswa;
-use App\Models\Kriteria;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HasilController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +17,21 @@ use App\Http\Controllers\KriteriaController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Siswa
+
+Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/register', [RegisterController::class, 'store']);
+
+//
 Route::get('/', [SiswaController::class, 'index']);
 Route::get('/siswa', [SiswaController::class, 'index']);
 Route::get('/siswa/detailSiswa/{id}', [SiswaController::class, 'show']);
 Route::get('/siswa/nilaisiswa', [SiswaController::class, 'createNilaiSiswa']);
 
-//Kriteria
+//
 Route::get('/kriteria', [KriteriaController::class, 'index']);
 
 
 // Route::get('/hasil', [HasilController::class, 'index']);
+//Login
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'authenticate']);
