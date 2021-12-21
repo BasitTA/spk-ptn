@@ -22,7 +22,8 @@
                             <th scope="col">No</th>
                             <th scope="col">Nama Siswa</th>
                             <th scope="col">JK</th>
-                            <th scope="col">TTL</th>
+                            <th scope="col">Tempat Lahir</th>
+                            <th scope="col">Tanggal Lahir</th>
                             <th scope="col">Aksi</th>
                         </tr>
                     </thead>

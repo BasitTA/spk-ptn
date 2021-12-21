@@ -18,7 +18,7 @@
     {{-- Top-Navbar --}}
     @include('partials.navbar')
 
-    <div class="navbar-expand-lg row mx-0 g-0">
+    <div class="navbar-expand-lg row mx-0 g-0 justify-content-center">
         {{-- Sidebar --}}
         @include('partials.sidebar')
 

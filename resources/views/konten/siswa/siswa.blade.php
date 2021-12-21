@@ -23,10 +23,10 @@
             <div class="border bg-white mb-3 rounded-3">
                 <div class="pt-3 mx-3 justify-content-between d-flex">
                     <h5 class="my-0 align-self-center">Daftar Siswa</h5>
-                    <a type="button" class="align-self-center btn btn-sm btn-success">Tambah Data</a>
+                    <a href="siswa/siswabaru" type="button" class="align-self-center btn btn-sm btn-success">Tambah Data</a>
                 </div>
 
-                <a class="ms-3" href="#">Daftar Siswa ></a>
+                {{-- <a class="ms-3" href="#">Daftar Siswa ></a> --}}
                 <div class="mt-3 mx-3 table-responsive">
                     <table class="table table-striped">
                         <thead class="table-success">
@@ -34,7 +34,8 @@
                                 <th scope="col">No</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">JK</th>
-                                <th scope="col">TTL</th>
+                                <th scope="col">Tempat Lahir</th>
+                                <th scope="col">Tanggal Lahir</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -45,9 +46,10 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $siswa->nama }}</td>
                                     <td>{{ $siswa->jk }}</td>
-                                    <td>{{ $siswa->ttl }}</td>
+                                    <td>{{ $siswa->tempat_lahir }}</td>
+                                    <td>{{ $siswa->tanggal_lahir }}</td>
                                     <td>
-                                        <a class="" href="/siswa/detailSiswa/{{ $siswa->id }}">Lihat</a>
+                                        <a class="" href="/siswa/detailsiswa/{{ $siswa->id }}">Lihat</a>
                                         <a class="">Edit</a>
                                         <a class="">Delete</a>
                                     </td>
@@ -64,7 +66,7 @@
                     <a href="/siswa/nilaisiswa" type="button" class="align-self-center btn btn-sm btn-success">Tambah
                         Data</a>
                 </div>
-                <a class="ms-3" href="#">Nilai Siswa ></a>
+                {{-- <a class="ms-3" href="#">Nilai Siswa ></a> --}}
                 <div class="mt-3 mx-3 bg-light table-responsive">
                     <table class="table table-striped">
                         <thead class="table-success">

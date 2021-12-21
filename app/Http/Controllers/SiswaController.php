@@ -17,11 +17,35 @@ class SiswaController extends Controller
         ]);
     }
 
+    public function create(){
+        return view('konten.siswa.create',[
+            "title" => "Siswa Baru",
+            "jk" => [
+                0 => "L",
+                1 => "P"
+            ],
+        ]);
+    }
+
     public function show(Siswa $id){
         return view('konten/siswa/detailSiswa',[
             "title" => "Calon Siswa",
             "siswas" => $id
         ]);
+    }
+
+    public function store(Request $request){
+        $validated = $request->validate([
+            'nama' => 'required|min:3|max:255',
+            'jk' => 'required',
+            'tempat_lahir' => 'required|min:3|max:255',
+            'tanggal_lahir' => 'required|min:3|max:255',
+            'alamat' => 'required|min:3|max:500',
+        ]);
+
+        Siswa::create($validated);
+
+        return redirect('/')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     public function createNilaiSiswa(){

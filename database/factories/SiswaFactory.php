@@ -16,7 +16,8 @@ class SiswaFactory extends Factory
         return [
             'nama' => $this->faker->name(mt_rand(1,3)),
             'jk' => $this->faker->randomElement(['L', 'P']),
-            'ttl' => $this->faker->dateTime(),
+            'tempat_lahir' => $this->faker->city(),
+            'tanggal_lahir' => $this->faker->date(),
             'alamat' => $this->faker->address()
         ];
     }

@@ -18,7 +18,8 @@ class CreateSiswasTable extends Migration
             $table->integer('nilai_siswa_id')->nullable();
             $table->string('nama');
             $table->string('jk');
-            $table->string('ttl');
+            $table->string('tempat_lahir');
+            $table->string('tanggal_lahir');
             $table->string('alamat');
             $table->timestamps();
         });
