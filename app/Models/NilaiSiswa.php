@@ -15,6 +15,15 @@ class NilaiSiswa extends Model
         'pilihan' => 'array'
     ];
 
+
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->where(function($query) use ($search){
+                $query->where('nama','like','%'.$search.'%');
+            });
+        });
+    }
+
     public function siswa(){
         return $this->belongsTo(Siswa::class);
     }

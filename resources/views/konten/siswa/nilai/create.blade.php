@@ -10,15 +10,16 @@
         <div class="mb-3">
             <h3 class="mb-0">Tambah Nilai Siswa</h3>
             <a href="/siswa" class="text-decoration-none">Data Siswa ></a>
-            <a href="/siswa/nilaisiswa" class="text-decoration-none"> Tambah Nilai Siswa ></a>
+            <a href="/siswa/nilaisiswa" class="text-decoration-none"> Nilai Baru</a>
         </div>
-
-        <form action="">
+        
+        {{-- FORM NILAI SISWA BARU --}}
+        <form method="post" action="/nilaisiswa/nilaibaru">
             {{-- FORM NAMA SISWA --}}
             <div class="mb-3">
                 <div class="form-group">
-                    <label for="name-selection" class="form-label">Nama Siswa</label>
-                    <select class="form-control form-control-sm" id="name-selection">
+                    <label for="nama" class="form-label">Nama Siswa</label>
+                    <select class="form-control form-control-sm" id="nama" name="nama">
                         <option value="" disabled selected hidden>-- Pilih Nama Siswa --</option>
                         @foreach ($siswas as $siswa)
                             <option>{{ $siswa->nama }}</option>
@@ -49,7 +50,5 @@
                 Simpan
             </button>
         </form>
-
-        <a href="/">Kembali</a>
     </div>
 @endsection

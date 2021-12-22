@@ -3,34 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\NilaiSiswa;
+// use App\Models\NilaiSiswa;
 use App\Models\Kriteria;
 use App\Models\Siswa;
 
 class SiswaController extends Controller
 {
     public function index(){
-        return view('konten/siswa/siswa',[
-            "title" => "Siswa",
-            "siswas" => Siswa::latest()->filter(request(['search']))->get(),
-            "nilai_siswas" => NilaiSiswa::latest()->get()
+        return view('konten.siswa.data.index',[
+            'title' => 'Siswa',
+            'siswas' => Siswa::latest()->filter(request(['search']))->get()
         ]);
     }
 
     public function create(){
-        return view('konten.siswa.create',[
-            "title" => "Siswa Baru",
-            "jk" => [
-                0 => "L",
-                1 => "P"
+        return view('konten.siswa.data.create',[
+            'title' => 'Siswa Baru',
+            'jk' => [
+                0 => 'L',
+                1 => 'P'
             ],
         ]);
     }
 
     public function show(Siswa $id){
-        return view('konten/siswa/detailSiswa',[
-            "title" => "Calon Siswa",
-            "siswas" => $id
+        return view('konten.siswa.data.show',[
+            'title' => 'Calon Siswa',
+            'siswas' => $id
         ]);
     }
 
@@ -45,14 +44,6 @@ class SiswaController extends Controller
 
         Siswa::create($validated);
 
-        return redirect('/')->with('success', 'Data Berhasil Ditambahkan');
-    }
-
-    public function createNilaiSiswa(){
-        return view('konten/siswa/tambahNilaiSiswa',[
-            "title" => "Tambah Nilai Siswa",
-            "siswas" => Siswa::orderBy('nama')->get(),
-            "kriterias" => Kriteria::all()
-        ]);
+        return redirect('/siswa')->with('success', 'Data Baru Berhasil Ditambahkan');
     }
 }
