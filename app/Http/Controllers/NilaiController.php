@@ -17,23 +17,30 @@ class NilaiController extends Controller
             'nilai_siswas' => NilaiSiswa::latest()->filter(request(['search']))->get()
         ]);
     }
-
-    // public function show(){
-    //     return view('konten.siswa.nilai.show');
-    // }
-
-    public function create(){
-        return view('konten.siswa.nilai.create',[
-            'title' => 'Nilai Baru',
-            'siswas' => Siswa::orderBy('nama')->get(),
-            'kriterias' => Kriteria::all()
-        ]);
-    }
     
-    public function store(Request $request){
-        $validated = $request->validate([
-            'nama' => 'required',
-            'nama' => 'required',
-        ]);
-    }
+    // public function show(){
+        //     return view('konten.siswa.nilai.show');
+        // }
+        
+        public function create(){
+            return view('konten.siswa.nilai.create',[
+                'title' => 'Nilai Baru',
+                'siswas' => Siswa::orderBy('nama')->get(),
+                'kriterias' => Kriteria::all()
+            ]);
+        }
+        
+        public function store(Request $request){
+            $nama = $request->nama;
+            $pilihan = [$request->C1, $request->C2, 
+            $request->C3, $request->C4, 
+            $request->C5, $request->C6];
+
+            NilaiSiswa::create([
+                'nama' => $nama,
+                'pilihan' => $pilihan
+            ]);
+
+            return redirect('/nilaisiswa')->with('success', 'Data Baru Berhasil Ditambahkan');
+        }
 }

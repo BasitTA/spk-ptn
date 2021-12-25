@@ -32,7 +32,7 @@
                 <div class="mb-3">
                     <label for="jk" class="form-label">Jenis Kelamin</label>
                     <select name="jk" id="jk" class="form-control form-control-sm @error('jk') is-invalid @enderror" required>
-                        <option selected disabled hidden>Jenis Kelamin</option>
+                        <option hidden disabled selected value="">-- Pilih Jenis Kelamin --</option>
                         @foreach ($jk as $jk)
                             <option value="{{ $jk }}">{{ $jk }}</option>
                         @endforeach
