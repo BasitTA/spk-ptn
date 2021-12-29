@@ -28,14 +28,13 @@
             </div>
         </div>
 
-        @if ($siswas->count())
-            {{-- Data Siswa --}}
-            <div class="border bg-white mb-3 rounded-3">
-                <div class="pt-3 mx-3 justify-content-between d-flex">
-                    <h5 class="my-0 align-self-center">Data Siswa</h5>
-                    <a href="siswa/siswabaru" type="button" class="align-self-center btn btn-sm btn-success">Tambah Data</a>
-                </div>
-
+        {{-- Data Siswa --}}
+        <div class="border bg-white mb-3 rounded-3">
+            <div class="pt-3 mx-3 justify-content-between d-flex">
+                <h5 class="my-0 align-self-center">Data Siswa</h5>
+                <a href="siswa/siswabaru" type="button" class="align-self-center btn btn-sm btn-success">Tambah Data</a>
+            </div>
+            @if ($siswas->count())
                 <div class="mt-3 mx-3 table-responsive">
                     <table class="table table-striped">
                         <thead class="table-success">
@@ -58,18 +57,22 @@
                                     <td>{{ $siswa->tempat_lahir }}</td>
                                     <td>{{ $siswa->tanggal_lahir }}</td>
                                     <td>
-                                        <a class="" href="/siswa/{{ $siswa->id }}">Lihat</a>
-                                        <a class="">Edit</a>
-                                        <a class="">Delete</a>
+                                        <a href="/siswa/{{ $siswa->id }}">L</a>
+                                        <a href="/siswa/{{ $siswa->id }}/edit">E</a>
+                                        <form class="d-inline" action="/siswa/{{ $siswa->id }}-{{ $siswa->nilai_siswa_id }}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data?')">D</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-            </div>
+            @else
+                <p class="text-center fs-4">Belum ada data yang diinput</p>
+            @endif
         </div>
-    @else
-        <p class="text-center fs-4">Belum ada data yang diinput</p>
-    @endif
+    </div>
 @endsection

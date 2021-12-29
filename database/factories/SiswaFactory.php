@@ -14,6 +14,7 @@ class SiswaFactory extends Factory
     public function definition()
     {
         return [
+            'nilai_siswa_id' => $this->faker->randomNumber(3, false),
             'nama' => $this->faker->name(mt_rand(1,3)),
             'jk' => $this->faker->randomElement(['L', 'P']),
             'tempat_lahir' => $this->faker->city(),

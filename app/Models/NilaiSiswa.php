@@ -9,7 +9,7 @@ class NilaiSiswa extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $fillable = ['id','nama','pilihan'];
 
     protected $casts = [
         'pilihan' => 'array'

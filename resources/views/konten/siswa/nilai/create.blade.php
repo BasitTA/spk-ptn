@@ -6,6 +6,14 @@
 
 @section('content')
     <div class="d-block col-lg-10 px-4 py-4">
+        {{-- Alert berhasil --}}
+        @if (session()->has('failed'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('failed') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         {{-- Header --}}
         <div class="mb-3">
             <h3 class="mb-0">Tambah Nilai Siswa</h3>
@@ -20,10 +28,10 @@
             <div class="mb-3">
                 <div class="form-group">
                     <label for="nama" class="form-label">Nama Siswa</label>
-                    <select name="nama" id="nama" class="form-control form-control-sm @error('nama') is-invalid @enderror" required>
+                    <select name="nilai_siswa_id" id="nilai_siswa_id" class="form-control form-control-sm @error('nilai_siswa_id') is-invalid @enderror" required>
                         <option hidden disabled selected value="">-- Pilih Nama Siswa --</option>
                         @foreach ($siswas as $siswa)
-                            <option value="{{$siswa->nama }}" @if(old('nama') == '{{ $siswa->nama }}') selected="selected" @endif>{{ $siswa->nama }}</option>
+                            <option value="{{ $siswa->nilai_siswa_id }}" @if(old('nilai_siswa_id') == '{{ $siswa->nilai_siswa_id }}') selected="selected" @endif>{{ $siswa->nama }} ({{ $siswa->tanggal_lahir }})</option>
                         @endforeach
                     </select>
 

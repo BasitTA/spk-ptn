@@ -17,40 +17,40 @@ class DatabaseSeeder extends Seeder
     public function run(){
         Siswa::factory(5)->create();
 
-        NilaiSiswa::create([
-            'nama' => 'Basit S.Kom',
-            'pilihan' => [
-                'a',
-                'b',
-                'c',
-                'd',
-                '1',
-                '2',
-            ],
-        ]);
+        // NilaiSiswa::create([
+        //     'nama' => 'Basit S.Kom',
+        //     'pilihan' => [
+        //         'a',
+        //         'b',
+        //         'c',
+        //         'd',
+        //         '1',
+        //         '2',
+        //     ],
+        // ]);
 
-        NilaiSiswa::create([
-            'nama' => 'Bunga',
-            'pilihan' => [
-                'e',
-                'f',
-                'g',
-                'h',
-                '3',
-                '4'
-            ],
-        ]);
-        NilaiSiswa::create([
-            'nama' => 'Abdul',
-            'pilihan' => [
-                'i',
-                'j',
-                'k',
-                'l',
-                '5',
-                '6',
-            ],
-        ]);
+        // NilaiSiswa::create([
+        //     'nama' => 'Bunga',
+        //     'pilihan' => [
+        //         'e',
+        //         'f',
+        //         'g',
+        //         'h',
+        //         '3',
+        //         '4'
+        //     ],
+        // ]);
+        // NilaiSiswa::create([
+        //     'nama' => 'Abdul',
+        //     'pilihan' => [
+        //         'i',
+        //         'j',
+        //         'k',
+        //         'l',
+        //         '5',
+        //         '6',
+        //     ],
+        // ]);
 
         // NilaiSiswa::factory(3)->create();
         // Siswa::create([
@@ -105,19 +105,19 @@ class DatabaseSeeder extends Seeder
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => '90-100',
-                    'bobot' => '4' 
+                    'bobot' => 4 
                 ],
                 [
                     'pilihan' => '80-89',
-                    'bobot' => '3' 
+                    'bobot' => 3 
                 ],
                 [
                     'pilihan' => '65-79',
-                    'bobot' => '2' 
+                    'bobot' => 2
                 ],
                 [
                     'pilihan' => '0-64',
-                    'bobot' => '1' 
+                    'bobot' => 1 
                 ],
             ]
         ]);
@@ -127,19 +127,19 @@ class DatabaseSeeder extends Seeder
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => '90-100',
-                    'bobot' => '4' 
+                    'bobot' => 4 
                 ],
                 [
                     'pilihan' => '80-89',
-                    'bobot' => '3' 
+                    'bobot' => 3 
                 ],
                 [
                     'pilihan' => '65-79',
-                    'bobot' => '2' 
+                    'bobot' => 2 
                 ],
                 [
                     'pilihan' => '0-64',
-                    'bobot' => '1' 
+                    'bobot' => 1 
                 ],
             ]
         ]);
@@ -149,19 +149,19 @@ class DatabaseSeeder extends Seeder
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => '90-100',
-                    'bobot' => '4' 
+                    'bobot' => 4 
                 ],
                 [
                     'pilihan' => '80-89',
-                    'bobot' => '3' 
+                    'bobot' => 3 
                 ],
                 [
                     'pilihan' => '65-79',
-                    'bobot' => '2' 
+                    'bobot' => 2 
                 ],
                 [
                     'pilihan' => '0-64',
-                    'bobot' => '1' 
+                    'bobot' => 1 
                 ],
             ]
         ]);
@@ -171,19 +171,19 @@ class DatabaseSeeder extends Seeder
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => '90-100',
-                    'bobot' => '4' 
+                    'bobot' => 4 
                 ],
                 [
                     'pilihan' => '80-89',
-                    'bobot' => '3' 
+                    'bobot' => 3 
                 ],
                 [
                     'pilihan' => '65-79',
-                    'bobot' => '2' 
+                    'bobot' => 2 
                 ],
                 [
                     'pilihan' => '0-64',
-                    'bobot' => '1' 
+                    'bobot' => 1 
                 ],
             ]
         ]);
@@ -193,19 +193,19 @@ class DatabaseSeeder extends Seeder
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => '< 1 JT',
-                    'bobot' => '4' 
+                    'bobot' => 4 
                 ],
                 [
                     'pilihan' => '1 JT - < 4.2 JT',
-                    'bobot' => '3' 
+                    'bobot' => 3 
                 ],
                 [
                     'pilihan' => '4.2 JT - 10 JT',
-                    'bobot' => '2' 
+                    'bobot' => 2 
                 ],
                 [
                     'pilihan' => '> 10 JT',
-                    'bobot' => '1' 
+                    'bobot' => 1 
                 ],
             ]
         ]);
@@ -215,19 +215,19 @@ class DatabaseSeeder extends Seeder
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => 'Yatim & Piatu',
-                    'bobot' => '4' 
+                    'bobot' => 4 
                 ],
                 [
                     'pilihan' => 'Yatim',
-                    'bobot' => '3' 
+                    'bobot' => 3 
                 ],
                 [
                     'pilihan' => 'Piatu',
-                    'bobot' => '2' 
+                    'bobot' => 2 
                 ],
                 [
                     'pilihan' => 'Orang Tua Lengkap',
-                    'bobot' => '1' 
+                    'bobot' => 1 
                 ],
             ]
         ]);
