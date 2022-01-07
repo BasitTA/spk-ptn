@@ -102,6 +102,7 @@ class DatabaseSeeder extends Seeder
         Kriteria::create([
             'kode' => 'C1',
             'nama' => 'Bacaan Quran',
+            'bobot_kriteria' => 0.25,
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => '90-100',
@@ -124,6 +125,7 @@ class DatabaseSeeder extends Seeder
         Kriteria::create([
             'kode' => 'C2',
             'nama' => 'Hafalan Quran',
+            'bobot_kriteria' => 0.25,
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => '90-100',
@@ -146,6 +148,7 @@ class DatabaseSeeder extends Seeder
         Kriteria::create([
             'kode' => 'C3',
             'nama' => 'Bacaan Shalat',
+            'bobot_kriteria' => 0.20,
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => '90-100',
@@ -168,6 +171,7 @@ class DatabaseSeeder extends Seeder
         Kriteria::create([
             'kode' => 'C4',
             'nama' => 'Tes Kepribadian',
+            'bobot_kriteria' => 0.15,
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => '90-100',
@@ -190,6 +194,7 @@ class DatabaseSeeder extends Seeder
         Kriteria::create([
             'kode' => 'C5',
             'nama' => 'Penghasilan Orang Tua',
+            'bobot_kriteria' => 0.10,
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => '< 1 JT',
@@ -212,6 +217,7 @@ class DatabaseSeeder extends Seeder
         Kriteria::create([
             'kode' => 'C6',
             'nama' => 'Status',
+            'bobot_kriteria' => 0.05,
             'pembobotan_kriteria' => [
                 [
                     'pilihan' => 'Yatim & Piatu',

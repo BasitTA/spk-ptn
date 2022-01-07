@@ -19,6 +19,7 @@ class CreateKriteriasTable extends Migration
             // 'siswa_id' => $this->faker->randomDigit(),
             $table->string('kode')->unique();
             $table->string('nama');
+            $table->double('bobot_kriteria');
             $table->json('pembobotan_kriteria');
             $table->timestamps();
         });
