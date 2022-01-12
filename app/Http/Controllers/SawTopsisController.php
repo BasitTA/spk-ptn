@@ -2,85 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSawTopsisRequest;
-use App\Http\Requests\UpdateSawTopsisRequest;
+use Illuminate\Http\Request;
 use App\Models\SawTopsis;
+use App\Models\Kriteria;
 
 class SawTopsisController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    // public function store(StoreSawTopsisRequest $request)
+    // {
+    //     //
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreSawTopsisRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreSawTopsisRequest $request)
-    {
-        //
-    }
+    // public function show(SawTopsis $sawTopsis)
+    // {
+    //     //
+    // }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\SawTopsis  $sawTopsis
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SawTopsis $sawTopsis)
-    {
-        //
-    }
+    // public function edit(SawTopsis $sawTopsis)
+    // {
+    //     //
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\SawTopsis  $sawTopsis
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SawTopsis $sawTopsis)
-    {
-        //
-    }
+    // public function update(UpdateSawTopsisRequest $request, SawTopsis $sawTopsis)
+    // {
+    //     //
+    // }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateSawTopsisRequest  $request
-     * @param  \App\Models\SawTopsis  $sawTopsis
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateSawTopsisRequest $request, SawTopsis $sawTopsis)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\SawTopsis  $sawTopsis
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SawTopsis $sawTopsis)
-    {
-        //
-    }
+    // public function destroy(SawTopsis $sawTopsis)
+    // {
+    //     //
+    // }
 }

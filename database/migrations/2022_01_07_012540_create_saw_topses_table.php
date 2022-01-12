@@ -21,8 +21,8 @@ class CreateSawTopsesTable extends Migration
             $table->json('normalisasi_matriks_y'); //Normalisasi matrix Y (pembobotan)
             $table->double('solusi_ideal_positif'); //Solusi ideal positif (A+)
             $table->double('solusi_ideal_negatif'); //Solusi ideal negatif (A-)
-            $table->double('jarak_terbobot_a+'); //Jarak Terbobot(D+) antara nilai tiap alternatif dgn Solusi ideal positif (A+)
-            $table->double('jarak_terbobot_a-'); //Jarak Terbobot(D-) antara nilai tiap alternatif dgn Solusi ideal negatif (A-)
+            $table->double('jarak_terbobot_a_positif'); //Jarak Terbobot(D+) antara nilai tiap alternatif dgn Solusi ideal positif (A+)
+            $table->double('jarak_terbobot_a_negatif'); //Jarak Terbobot(D-) antara nilai tiap alternatif dgn Solusi ideal negatif (A-)
             $table->double('nilai_preferensi'); //Nilai preferensi tiap alternatif
             $table->timestamps();
         });
