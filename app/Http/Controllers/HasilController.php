@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\NilaiSiswa;
 use App\Models\Kriteria;
+use App\Models\SawTopsis;
 
 class HasilController extends Controller
 {
@@ -14,12 +15,48 @@ class HasilController extends Controller
     // }
 
     protected $maksX, $normalisasi_matriks_r, $normalisasi_matriks_terbobot_y, $solusi_ideal_positif, $solusi_ideal_negatif, $jarak_terbobot_a_positif, $jarak_terbobot_a_negatif, $nilai_preferensi = array();
-    protected $nilai_siswa, $kriteria;
+    protected $nilai_siswa, $kriteria, $saw_topsis;
 
     function data(){
         $this->nilai_siswa = NilaiSiswa::all();
         $this->kriteria = Kriteria::all();
     }
+
+
+    function transpose($array){
+        array_unshift($array, null);
+        return call_user_func_array('array_map', $array);
+    }
+    
+    function rounded($numbers){
+        return array_map(function($v) { return round($v, 2); }, $numbers);
+    }
+
+    //transpose array/matriks
+    function transposer(){
+        $this->normalisasi_matriks_r = $this->transpose($this->normalisasi_matriks_r);
+        $this->normalisasi_matriks_terbobot_y = $this->transpose($this->normalisasi_matriks_terbobot_y);
+    }
+
+    //pembulatan bilangan 2 angka desimal
+    function rounder(){
+        $x = count($this->normalisasi_matriks_r);
+        for ($i=0 ; $i<$x ; $i++) { 
+            $this->normalisasi_matriks_r[$i] = $this->rounded($this->normalisasi_matriks_r[$i]);
+        }
+
+        $y = count($this->normalisasi_matriks_terbobot_y);
+        for ($i=0 ; $i<$y ; $i++) { 
+            $this->normalisasi_matriks_terbobot_y[$i] = $this->rounded($this->normalisasi_matriks_terbobot_y[$i]);
+        }
+        
+        $this->solusi_ideal_positif = $this->rounded($this->solusi_ideal_positif);
+        $this->solusi_ideal_negatif = $this->rounded($this->solusi_ideal_negatif);
+        $this->jarak_terbobot_a_positif = $this->rounded($this->jarak_terbobot_a_positif);
+        $this->jarak_terbobot_a_negatif = $this->rounded($this->jarak_terbobot_a_negatif);
+        $this->nilai_preferensi = $this->rounded($this->nilai_preferensi);
+    }
+
 
     function main(){
         $this->data();
@@ -33,9 +70,14 @@ class HasilController extends Controller
             $this->hitungJarakTerbobotAPositif();
             $this->hitungJarakTerbobotANegatif();
             $this->hitungNilaiPreferensi();
+            $this->transposer();
+            $this->rounder();
+            // dd("maks",$this->maksX, "normalisasi matriks r",$this->normalisasi_matriks_r, "normalisasi matriks terbobot y",$this->normalisasi_matriks_terbobot_y, "solusi ideal positif",$this->solusi_ideal_positif, "solusi ideal negatif",$this->solusi_ideal_negatif, "jarak terbobot alternatif positif",$this->jarak_terbobot_a_positif, "jarak terbobot alternatif negatif",$this->jarak_terbobot_a_negatif, "nilai preferensi",$this->nilai_preferensi);
         }else{
             echo('Data nilai siswa masih kosong');
         }
+
+        // dd($this->nilai_preferensi);
     }
 
     //SAW
@@ -70,10 +112,8 @@ class HasilController extends Controller
     }
 
     function normalisasiMatriksR(){
-
-    $normalisasi_matriks_r1 = $normalisasi_matriks_r2= $normalisasi_matriks_r3= $normalisasi_matriks_r4= $normalisasi_matriks_r5= $normalisasi_matriks_r6 = array();
+        $normalisasi_matriks_r1 = $normalisasi_matriks_r2= $normalisasi_matriks_r3= $normalisasi_matriks_r4= $normalisasi_matriks_r5= $normalisasi_matriks_r6 = array();
     
-
         // dd($this->maksX);
         if($this->nilai_siswa->count()>1){
             // dd($this->nilai_siswa->count());
@@ -85,7 +125,6 @@ class HasilController extends Controller
                 $kriteria5[] = $ns['pilihan'][4];
                 $kriteria6[] = $ns['pilihan'][5];
             };
-
             // dd($kriteria1);
 
             foreach($kriteria1 as $k1){
@@ -232,127 +271,53 @@ class HasilController extends Controller
     function hitungJarakTerbobotAPositif(){
         $normalisasi_matriks_terbobot_y = $this->normalisasi_matriks_terbobot_y;
         $solusi_ideal_positif = $this->solusi_ideal_positif;
-        $jarak_terbobot_a_positif1 = $jarak_terbobot_a_positif2 =$jarak_terbobot_a_positif3 = $jarak_terbobot_a_positif4 = $jarak_terbobot_a_positif5 = $jarak_terbobot_a_positif6 = null;
+        // $jarak_terbobot_a_positif1 = $jarak_terbobot_a_positif2 =$jarak_terbobot_a_positif3 = $jarak_terbobot_a_positif4 = $jarak_terbobot_a_positif5 = $jarak_terbobot_a_positif6 = null;
         
         // dd($normalisasi_matriks_terbobot_y, $solusi_ideal_positif);
-        
-        $jarak_terbobot_a_positif1 = sqrt(pow(($solusi_ideal_positif[0]-$normalisasi_matriks_terbobot_y[0][0]),2)+
-        pow(($solusi_ideal_positif[1]-$normalisasi_matriks_terbobot_y[1][0]),2)+
-        pow(($solusi_ideal_positif[2]-$normalisasi_matriks_terbobot_y[2][0]),2)+
-        pow(($solusi_ideal_positif[3]-$normalisasi_matriks_terbobot_y[3][0]),2)+
-        pow(($solusi_ideal_positif[4]-$normalisasi_matriks_terbobot_y[4][0]),2)+
-        pow(($solusi_ideal_positif[5]-$normalisasi_matriks_terbobot_y[5][0]),2));
-        
-        $jarak_terbobot_a_positif2 = sqrt(pow(($solusi_ideal_positif[0]-$normalisasi_matriks_terbobot_y[0][1]),2)+
-        pow(($solusi_ideal_positif[1]-$normalisasi_matriks_terbobot_y[1][1]),2)+
-        pow(($solusi_ideal_positif[2]-$normalisasi_matriks_terbobot_y[2][1]),2)+
-        pow(($solusi_ideal_positif[3]-$normalisasi_matriks_terbobot_y[3][1]),2)+
-        pow(($solusi_ideal_positif[4]-$normalisasi_matriks_terbobot_y[4][1]),2)+
-        pow(($solusi_ideal_positif[5]-$normalisasi_matriks_terbobot_y[5][1]),2));
-        
-        $jarak_terbobot_a_positif3 = sqrt(pow(($solusi_ideal_positif[0]-$normalisasi_matriks_terbobot_y[0][2]),2)+
-        pow(($solusi_ideal_positif[1]-$normalisasi_matriks_terbobot_y[1][2]),2)+
-        pow(($solusi_ideal_positif[2]-$normalisasi_matriks_terbobot_y[2][2]),2)+
-        pow(($solusi_ideal_positif[3]-$normalisasi_matriks_terbobot_y[3][2]),2)+
-        pow(($solusi_ideal_positif[4]-$normalisasi_matriks_terbobot_y[4][2]),2)+
-        pow(($solusi_ideal_positif[5]-$normalisasi_matriks_terbobot_y[5][2]),2));
-
-        $jarak_terbobot_a_positif4 = sqrt(pow(($solusi_ideal_positif[0]-$normalisasi_matriks_terbobot_y[0][3]),2)+
-        pow(($solusi_ideal_positif[1]-$normalisasi_matriks_terbobot_y[1][3]),2)+
-        pow(($solusi_ideal_positif[2]-$normalisasi_matriks_terbobot_y[2][3]),2)+
-        pow(($solusi_ideal_positif[3]-$normalisasi_matriks_terbobot_y[3][3]),2)+
-        pow(($solusi_ideal_positif[4]-$normalisasi_matriks_terbobot_y[4][3]),2)+
-        pow(($solusi_ideal_positif[5]-$normalisasi_matriks_terbobot_y[5][3]),2));
-        
-        $jarak_terbobot_a_positif5 = sqrt(pow(($solusi_ideal_positif[0]-$normalisasi_matriks_terbobot_y[0][4]),2)+
-        pow(($solusi_ideal_positif[1]-$normalisasi_matriks_terbobot_y[1][4]),2)+
-        pow(($solusi_ideal_positif[2]-$normalisasi_matriks_terbobot_y[2][4]),2)+
-        pow(($solusi_ideal_positif[3]-$normalisasi_matriks_terbobot_y[3][4]),2)+
-        pow(($solusi_ideal_positif[4]-$normalisasi_matriks_terbobot_y[4][4]),2)+
-        pow(($solusi_ideal_positif[5]-$normalisasi_matriks_terbobot_y[5][4]),2));
-        
-
-        $this->jarak_terbobot_a_positif = [
-            $jarak_terbobot_a_positif1,
-            $jarak_terbobot_a_positif2,
-            $jarak_terbobot_a_positif3,
-            $jarak_terbobot_a_positif4,
-            $jarak_terbobot_a_positif5
-        ];
-
+        for ($i=0; $i < $this->nilai_siswa->count(); $i++) {
+            $this->jarak_terbobot_a_positif[] = sqrt(pow(($solusi_ideal_positif[0]-$normalisasi_matriks_terbobot_y[0][$i]),2)+
+            pow(($solusi_ideal_positif[1]-$normalisasi_matriks_terbobot_y[1][$i]),2)+
+            pow(($solusi_ideal_positif[2]-$normalisasi_matriks_terbobot_y[2][$i]),2)+
+            pow(($solusi_ideal_positif[3]-$normalisasi_matriks_terbobot_y[3][$i]),2)+
+            pow(($solusi_ideal_positif[4]-$normalisasi_matriks_terbobot_y[4][$i]),2)+
+            pow(($solusi_ideal_positif[5]-$normalisasi_matriks_terbobot_y[5][$i]),2));
+        }
         // dd($this->jarak_terbobot_a_positif);
     }
     function hitungJarakTerbobotANegatif(){
-
         $normalisasi_matriks_terbobot_y = $this->normalisasi_matriks_terbobot_y;
         $solusi_ideal_negatif = $this->solusi_ideal_negatif;
-        $jarak_terbobot_a_negatif1 = $jarak_terbobot_a_negatif2 =$jarak_terbobot_a_negatif3 = $jarak_terbobot_a_negatif4 = $jarak_terbobot_a_negatif5 = $jarak_terbobot_a_negatif6 = null;
-        
-        // dd($normalisasi_matriks_terbobot_y, $solusi_ideal_negatif);
-        
-        $jarak_terbobot_a_negatif1 = sqrt(pow(($normalisasi_matriks_terbobot_y[0][0]-$solusi_ideal_negatif[0]),2)+
-        pow(($normalisasi_matriks_terbobot_y[1][0]-$solusi_ideal_negatif[1]),2)+
-        pow(($normalisasi_matriks_terbobot_y[2][0]-$solusi_ideal_negatif[2]),2)+
-        pow(($normalisasi_matriks_terbobot_y[3][0]-$solusi_ideal_negatif[3]),2)+
-        pow(($normalisasi_matriks_terbobot_y[4][0]-$solusi_ideal_negatif[4]),2)+
-        pow(($normalisasi_matriks_terbobot_y[5][0]-$solusi_ideal_negatif[5]),2));
-        
-        $jarak_terbobot_a_negatif2 = sqrt(pow(($normalisasi_matriks_terbobot_y[0][1]-$solusi_ideal_negatif[0]),2)+
-        pow(($normalisasi_matriks_terbobot_y[1][1]-$solusi_ideal_negatif[1]),2)+
-        pow(($normalisasi_matriks_terbobot_y[2][1]-$solusi_ideal_negatif[2]),2)+
-        pow(($normalisasi_matriks_terbobot_y[3][1]-$solusi_ideal_negatif[3]),2)+
-        pow(($normalisasi_matriks_terbobot_y[4][1]-$solusi_ideal_negatif[4]),2)+
-        pow(($normalisasi_matriks_terbobot_y[5][1]-$solusi_ideal_negatif[5]),2));
-        
-        $jarak_terbobot_a_negatif3 = sqrt(pow(($normalisasi_matriks_terbobot_y[0][2]-$solusi_ideal_negatif[0]),2)+
-        pow(($normalisasi_matriks_terbobot_y[1][2]-$solusi_ideal_negatif[1]),2)+
-        pow(($normalisasi_matriks_terbobot_y[2][2]-$solusi_ideal_negatif[2]),2)+
-        pow(($normalisasi_matriks_terbobot_y[3][2]-$solusi_ideal_negatif[3]),2)+
-        pow(($normalisasi_matriks_terbobot_y[4][2]-$solusi_ideal_negatif[4]),2)+
-        pow(($normalisasi_matriks_terbobot_y[5][2]-$solusi_ideal_negatif[5]),2));
 
-        $jarak_terbobot_a_negatif4 = sqrt(pow(($normalisasi_matriks_terbobot_y[0][3]-$solusi_ideal_negatif[0]),2)+
-        pow(($normalisasi_matriks_terbobot_y[1][3]-$solusi_ideal_negatif[1]),2)+
-        pow(($normalisasi_matriks_terbobot_y[2][3]-$solusi_ideal_negatif[2]),2)+
-        pow(($normalisasi_matriks_terbobot_y[3][3]-$solusi_ideal_negatif[3]),2)+
-        pow(($normalisasi_matriks_terbobot_y[4][3]-$solusi_ideal_negatif[4]),2)+
-        pow(($normalisasi_matriks_terbobot_y[5][3]-$solusi_ideal_negatif[5]),2));
-
-        $jarak_terbobot_a_negatif5 = sqrt(pow(($normalisasi_matriks_terbobot_y[0][4]-$solusi_ideal_negatif[0]),2)+
-        pow(($normalisasi_matriks_terbobot_y[1][4]-$solusi_ideal_negatif[1]),2)+
-        pow(($normalisasi_matriks_terbobot_y[2][4]-$solusi_ideal_negatif[2]),2)+
-        pow(($normalisasi_matriks_terbobot_y[3][4]-$solusi_ideal_negatif[3]),2)+
-        pow(($normalisasi_matriks_terbobot_y[4][4]-$solusi_ideal_negatif[4]),2)+
-        pow(($normalisasi_matriks_terbobot_y[5][4]-$solusi_ideal_negatif[5]),2));
-        
-
-        $this->jarak_terbobot_a_negatif = [
-            $jarak_terbobot_a_negatif1,
-            $jarak_terbobot_a_negatif2,
-            $jarak_terbobot_a_negatif3,
-            $jarak_terbobot_a_negatif4,
-            $jarak_terbobot_a_negatif5,
-        ];
+        for ($i=0; $i < $this->nilai_siswa->count(); $i++) {     
+            $this->jarak_terbobot_a_negatif[] = sqrt(pow(($normalisasi_matriks_terbobot_y[0][$i]-$solusi_ideal_negatif[0]),2)+
+            pow(($normalisasi_matriks_terbobot_y[1][$i]-$solusi_ideal_negatif[1]),2)+
+            pow(($normalisasi_matriks_terbobot_y[2][$i]-$solusi_ideal_negatif[2]),2)+
+            pow(($normalisasi_matriks_terbobot_y[3][$i]-$solusi_ideal_negatif[3]),2)+
+            pow(($normalisasi_matriks_terbobot_y[4][$i]-$solusi_ideal_negatif[4]),2)+
+            pow(($normalisasi_matriks_terbobot_y[5][$i]-$solusi_ideal_negatif[5]),2));
+        }
 
         // dd($this->jarak_terbobot_a_negatif);
     }
 
     function hitungNilaiPreferensi(){
-        $this->nilai_preferensi[0] = $this->jarak_terbobot_a_negatif[0]/($this->jarak_terbobot_a_negatif[0]+$this->jarak_terbobot_a_positif[0]);
-        $this->nilai_preferensi[1] = $this->jarak_terbobot_a_negatif[1]/($this->jarak_terbobot_a_negatif[1]+$this->jarak_terbobot_a_positif[1]);
-        $this->nilai_preferensi[2] = $this->jarak_terbobot_a_negatif[2]/($this->jarak_terbobot_a_negatif[2]+$this->jarak_terbobot_a_positif[2]);
-        $this->nilai_preferensi[3] = $this->jarak_terbobot_a_negatif[3]/($this->jarak_terbobot_a_negatif[3]+$this->jarak_terbobot_a_positif[3]);
-        $this->nilai_preferensi[4] = $this->jarak_terbobot_a_negatif[4]/($this->jarak_terbobot_a_negatif[4]+$this->jarak_terbobot_a_positif[4]);
-
-        dd("maks",$this->maksX, "normalisasi matriks r",$this->normalisasi_matriks_r, "normalisasi matriks terbobot y",$this->normalisasi_matriks_terbobot_y, "solusi ideal positif",$this->solusi_ideal_positif, "solusi ideal negatif",$this->solusi_ideal_negatif, "jarak terbobot alternatif positif",$this->jarak_terbobot_a_positif, "jarak terbobot alternatif negatif",$this->jarak_terbobot_a_negatif, "nilai preferensi",$this->nilai_preferensi);
+        for ($i=0; $i < $this->nilai_siswa->count(); $i++) { 
+            $this->nilai_preferensi[$i] = $this->jarak_terbobot_a_negatif[$i]/($this->jarak_terbobot_a_negatif[$i]+$this->jarak_terbobot_a_positif[$i]);
+        }
     }
-
 
     public function index(){
         $this->main();
         return view('konten.hasil perhitungan.index',[
             'title' => 'Hasil Perhitungan',
-            'nilai_siswas' => NilaiSiswa::all()
+            'nilai_siswas' => NilaiSiswa::all(),
+            'normalisasi_matriks_r' => $this->normalisasi_matriks_r,
+            'normalisasi_matriks_terbobot_y' => $this->normalisasi_matriks_terbobot_y,
+            'solusi_ideal_positif' => $this->solusi_ideal_positif,
+            'solusi_ideal_negatif' => $this->solusi_ideal_negatif,
+            'jarak_terbobot_a_positif' => $this->jarak_terbobot_a_positif,
+            'jarak_terbobot_a_negatif' => $this->jarak_terbobot_a_negatif,
+            'nilai_preferensi' => $this->nilai_preferensi
         ]);
     }
 }

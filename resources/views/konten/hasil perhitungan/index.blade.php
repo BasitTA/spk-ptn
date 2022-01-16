@@ -36,19 +36,14 @@
                     <table class="table table-striped">
                         <thead class="table-success">
                             <tr>
+                                <th scope="col">No</th>
                                 <th scope="col">Kode</th>
                                 <th scope="col">Nama Siswa</th>
                                 <th scope="col">Nilai</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($kriteria->pembobotan_kriteria as $p) --}}
-                                <tr>
-                                    {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
-                                    {{-- <td>{{ $p['pilihan'] }}</td>
-                                    <td>{{ $p['bobot'] }}</td> --}}
-                                </tr>
-                            {{-- @endforeach --}}
+
                         </tbody>
                     </table>
                 </div>
@@ -60,16 +55,16 @@
 
         {{-- Data Calon Siswa --}}
         {{-- Table 1 --}}
-        <div class="">
-            <div class="mx-2 my-2 border rounded-2">
+        {{-- <div class="">
+            <div class="mx-2 my-2 border rounded-2"> --}}
                 {{-- Header --}}
-                <div class="mx-3">
+                {{-- <div class="mx-3">
                     <div class="pt-3 text-center">
                         <h5 class="my-0 text-dark inliner">Data Calon Siswa</h5>
                     </div>
-                </div>
+                </div> --}}
                 {{-- Table --}}
-                <div class="mt-2 mx-3 bg-light table-responsive">
+                {{-- <div class="mt-2 mx-3 bg-light table-responsive">
                     <table class="table table-striped">
                         <thead class="table-success">
                             <tr>
@@ -97,7 +92,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- Persamaan matriks keputusan X (rating keputusan) --}}
         {{-- Table 2 --}}
@@ -126,13 +121,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($kriteria->pembobotan_kriteria as $p) --}}
-                                    <tr>
-                                        {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
-                                        {{-- <td>{{ $p['pilihan'] }}</td>
-                                        <td>{{ $p['bobot'] }}</td> --}}
-                                    </tr>
-                                {{-- @endforeach --}}
+                                @foreach ($nilai_siswas as $ns)
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $ns->nama }}</td>
+                                    @foreach ($ns->pilihan as $pilihan)
+                                        <td>{{ $pilihan }}</td>
+                                    @endforeach
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -151,6 +148,7 @@
                             <h6 class="my-0 text-dark inliner">Normalisasi Matriks Keputusan R</h6>
                         </div>
                     </div>
+
                     {{-- Table --}}
                     <div class="mt-2 mx-3 bg-light table-responsive">
                         <table class="table table-striped">
@@ -167,13 +165,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($kriteria->pembobotan_kriteria as $p) --}}
-                                    <tr>
-                                        {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
-                                        {{-- <td>{{ $p['pilihan'] }}</td>
-                                        <td>{{ $p['bobot'] }}</td> --}}
-                                    </tr>
-                                {{-- @endforeach --}}
+                                <?php $x = 0 ?>
+                                @foreach ($nilai_siswas as $ns)
+                                <tr>
+                                    {{-- {{ dd($normalisasi_matriks_r) }} --}}
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $ns->nama }}</td>
+                                    @for ($i = 0; $i < 6 ; $i++)
+                                        <td>{{ $normalisasi_matriks_r[$x][$i] }}</td>
+                                    @endfor
+                                    <?php $x++ ?>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -208,13 +211,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($kriteria->pembobotan_kriteria as $p) --}}
+                                <?php $x = 0 ?>
+                                @foreach ($nilai_siswas as $ns)
                                     <tr>
-                                        {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
-                                        {{-- <td>{{ $p['pilihan'] }}</td>
-                                        <td>{{ $p['bobot'] }}</td> --}}
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $ns->nama }}</td>
+                                        @for ($i = 0; $i < 6 ; $i++)
+                                            <td>{{ $normalisasi_matriks_terbobot_y[$x][$i] }}</td>
+                                        @endfor
+                                        <?php $x++ ?>
                                     </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -230,7 +237,7 @@
                     {{-- Header --}}
                     <div class="mx-3">
                         <div class="pt-3 text-center">
-                            <h6 class="my-0 text-dark inliner">Solusi Ideal Positif (A+)</h6>
+                            <h6 class="my-0 text-dark inliner">Solusi Ideal Positif (A <sup>+</sup>)</h6>
                         </div>
                     </div>
                     {{-- Table --}}
@@ -238,22 +245,20 @@
                         <table class="table table-striped">
                             <thead class="table-success">
                                 <tr>
-                                    {{-- <th scope="col">No</th> --}}
-                                    <th scope="col">A1+</th>
-                                    <th scope="col">A2+</th>
-                                    <th scope="col">A3+</th>
-                                    <th scope="col">A4+</th>
-                                    <th scope="col">A5+</th>
+                                    <th scope="col">A1 <sup>+</sup></th>
+                                    <th scope="col">A2 <sup>+</sup></th>
+                                    <th scope="col">A3 <sup>+</sup></th>
+                                    <th scope="col">A4 <sup>+</sup></th>
+                                    <th scope="col">A5 <sup>+</sup></th>
+                                    <th scope="col">A6 <sup>+</sup></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($kriteria->pembobotan_kriteria as $p) --}}
-                                    <tr>
-                                        {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
-                                        {{-- <td>{{ $p['pilihan'] }}</td>
-                                        <td>{{ $p['bobot'] }}</td> --}}
-                                    </tr>
-                                {{-- @endforeach --}}
+                                <tr>
+                                    @foreach ($solusi_ideal_positif as $s_i_p)
+                                        <td>{{ $s_i_p }}</td>
+                                    @endforeach
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -269,7 +274,7 @@
                     {{-- Header --}}
                     <div class="mx-3">
                         <div class="pt-3 text-center">
-                            <h6 class="my-0 text-dark inliner">Solusi Ideal Negatif (A-)</h6>
+                            <h6 class="my-0 text-dark inliner">Solusi Ideal Negatif (A <sup>-</sup>)</h6>
                         </div>
                     </div>
                     {{-- Table --}}
@@ -278,21 +283,20 @@
                             <thead class="table-success">
                                 <tr>
                                     {{-- <th scope="col">No</th> --}}
-                                    <th scope="col">A1-</th>
-                                    <th scope="col">A2-</th>
-                                    <th scope="col">A3-</th>
-                                    <th scope="col">A4-</th>
-                                    <th scope="col">A5-</th>
+                                    <th scope="col">A1 <sup>-</sup></th>
+                                    <th scope="col">A2 <sup>-</sup></th>
+                                    <th scope="col">A3 <sup>-</sup></th>
+                                    <th scope="col">A4 <sup>-</sup></th>
+                                    <th scope="col">A5 <sup>-</sup></th>
+                                    <th scope="col">A6 <sup>-</sup></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($kriteria->pembobotan_kriteria as $p) --}}
-                                    <tr>
-                                        {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
-                                        {{-- <td>{{ $p['pilihan'] }}</td>
-                                        <td>{{ $p['bobot'] }}</td> --}}
-                                    </tr>
-                                {{-- @endforeach --}}
+                                <tr>
+                                    @foreach ($solusi_ideal_negatif as $s_i_n)
+                                        <td>{{ $s_i_n }}</td>
+                                    @endforeach
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -308,7 +312,7 @@
                     {{-- Header --}}
                     <div class="mx-3">
                         <div class="pt-3 text-center">
-                            <h6 class="my-0 text-dark inliner">Jarak Terbobot Alternatif Solusi Ideal Positif (S1+)</h6>
+                            <h6 class="my-0 text-dark inliner">Jarak Terbobot Alternatif Solusi Ideal Positif (Di <sup>+</sup>)</h6>
                         </div>
                     </div>
                     {{-- Table --}}
@@ -316,22 +320,17 @@
                         <table class="table table-striped">
                             <thead class="table-success">
                                 <tr>
-                                    {{-- <th scope="col">No</th> --}}
-                                    <th scope="col">D1+</th>
-                                    <th scope="col">D2+</th>
-                                    <th scope="col">D3+</th>
-                                    <th scope="col">D4+</th>
-                                    <th scope="col">D5+</th>
+                                    <th scope="col">Di <sup>+</sup></th>
+                                    <th scope="col">Nilai</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($kriteria->pembobotan_kriteria as $p) --}}
+                                @foreach ($jarak_terbobot_a_positif as $j_t_a_p)
                                     <tr>
-                                        {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
-                                        {{-- <td>{{ $p['pilihan'] }}</td>
-                                        <td>{{ $p['bobot'] }}</td> --}}
+                                        <th scope="row">D{{ $loop->iteration }} <sup>+</sup></td>
+                                        <td>{{ $j_t_a_p }}</td>
                                     </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -347,7 +346,7 @@
                     {{-- Header --}}
                     <div class="mx-3">
                         <div class="pt-3 text-center">
-                            <h6 class="my-0 text-dark inliner">Jarak Terbobot Alternatif Solusi Ideal Negatif (S1-)</h6>
+                            <h6 class="my-0 text-dark inliner">Jarak Terbobot Alternatif Solusi Ideal Negatif (Di <sup>-</sup>)</h6>
                         </div>
                     </div>
                     {{-- Table --}}
@@ -355,22 +354,17 @@
                         <table class="table table-striped">
                             <thead class="table-success">
                                 <tr>
-                                    {{-- <th scope="col">No</th> --}}
-                                    <th scope="col">D1-</th>
-                                    <th scope="col">D2-</th>
-                                    <th scope="col">D3-</th>
-                                    <th scope="col">D4-</th>
-                                    <th scope="col">D5-</th>
+                                    <th scope="col">Di <sup>-</sup></th>
+                                    <th scope="col">Nilai</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($kriteria->pembobotan_kriteria as $p) --}}
+                                @foreach ($jarak_terbobot_a_negatif as $j_t_a_n)
                                     <tr>
-                                        {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
-                                        {{-- <td>{{ $p['pilihan'] }}</td>
-                                        <td>{{ $p['bobot'] }}</td> --}}
+                                        <th scope="row">D{{ $loop->iteration }} <sup>-</sup></td>
+                                        <td>{{ $j_t_a_n }}</td>
                                     </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -378,7 +372,7 @@
             </div>
         {{-- @endforeach --}}
 
-        {{-- Nilai Preferensi (Ranking) --}}
+        {{-- Nilai Preferensi (Unranked) --}}
         {{-- Table 9 --}}
         {{-- @foreach ($kriterias as $kriteria) --}}
             <div class="">
@@ -386,7 +380,7 @@
                     {{-- Header --}}
                     <div class="mx-3">
                         <div class="pt-3 text-center">
-                            <h6 class="my-0 text-dark inliner">Nilai Preferensi (Ranking)</h6>
+                            <h6 class="my-0 text-dark inliner">Nilai Preferensi</h6>
                         </div>
                     </div>
                     {{-- Table --}}
@@ -394,19 +388,21 @@
                         <table class="table table-striped">
                             <thead class="table-success">
                                 <tr>
-                                    <th scope="col">Id/Kode</th>
+                                    <th scope="col">Kode</th>
                                     <th scope="col">Nama Siswa</th>
                                     <th scope="col">Nilai</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($kriteria->pembobotan_kriteria as $p) --}}
+                                <?php $x=0 ?>
+                                @foreach ($nilai_siswas as $n_s)
                                     <tr>
-                                        {{-- <th scope="row">{{ $loop->iteration }}</th> --}}
-                                        {{-- <td>{{ $p['pilihan'] }}</td>
-                                        <td>{{ $p['bobot'] }}</td> --}}
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $n_s->nama }}</td>
+                                        <td>{{ $nilai_preferensi[$x] }}</td>
+                                        <?php $x++ ?>
                                     </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -7,7 +7,6 @@ use App\Models\Siswa;
 use App\Models\Kriteria;
 use App\Models\NilaiSiswa;
 
-
 class NilaiController extends Controller
 {
     public function index(){
