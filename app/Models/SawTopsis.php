@@ -9,12 +9,19 @@ class SawTopsis extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    // protected $fillable = ['id','matriks_x','max_x','normalisasi_matriks_r',
+    // 'normalisasi_matriks_y',
+    // 'solusi_ideal_positif',
+    // 'solusi_ideal_negatif',
+    // 'jarak_terbobot_a_positif',
+    // 'jarak_terbobot_a_negatif',
+    // 'nilai_preferensi'];
+
+    protected $guarded = [];
 
     protected $casts = [
-        'matriks_x' => 'array',
         'normalisasi_matriks_r' => 'array',
         'normalisasi_matriks_y' => 'array',
-        'normalisasi_matriks_y' => 'array'
+        'nilai_preferensi' => 'array',
     ];
 }

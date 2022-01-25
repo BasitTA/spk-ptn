@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+
+@if ($nilai_siswas->count()>1)
     <div class="row col-lg-10 g-0 bg-light px-2 py-2">
         {{-- Kesimpulan --}}
         <div class="">
@@ -17,7 +19,7 @@
                 </div>
                 {{-- Deskriptif --}}
                 <div class="mt-2 mx-3 bg-light">
-                    <p>Berdasarkan hasil perhitungan dengan Metode SAW dan TOPSIS, dapat disimpulkan bahwa calon siswa terbaik adalah V_ yaitu ____ dengan nilai _</p>
+                    <p>Berdasarkan hasil perhitungan dengan Metode SAW dan TOPSIS, dapat disimpulkan bahwa calon siswa terbaik adalah <strong>{{ $hasil_perangkingan[0]->nama }}</strong> dengan nilai <strong>{{ $hasil_perangkingan[0]->nilai_preferensi }}</strong></p>
                 </div>
             </div>
         </div>
@@ -28,7 +30,7 @@
                 {{-- Header --}}
                 <div class="mx-3">
                     <div class="pt-3 d-flex justify-content-between">
-                        <h5 class="my-0 align-self-center text-dark inliner">Nilai Preferensi (Ranking)</h5>
+                        <h5 class="my-0 align-self-center text-dark inliner">Hasil Perangkingan</h5>
                     </div>
                 </div>
                 {{-- Table --}}
@@ -37,13 +39,18 @@
                         <thead class="table-success">
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Kode</th>
                                 <th scope="col">Nama Siswa</th>
                                 <th scope="col">Nilai</th>
                             </tr>
                         </thead>
                         <tbody>
-
+                            @foreach ($hasil_perangkingan as $hp)
+                                <tr>
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $hp->nama }}</td>
+                                    <td>{{ $hp->nilai_preferensi }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -98,6 +105,7 @@
         {{-- Table 2 --}}
         {{-- @foreach ($kriterias as $kriteria) --}}
             <div class="">
+                <h4 class="text-start mx-3 mb-3">Perhitungan Metode SAW dan TOPSIS</h4>
                 <div class="mx-2 my-2 border rounded-2">
                     {{-- Header --}}
                     <div class="mx-3">
@@ -410,4 +418,23 @@
             </div>
         {{-- @endforeach --}}
     </div>
+@else
+    <div class="row col-lg-10 g-0 bg-light px-2 py-2">
+        {{-- Kesimpulan --}}
+        <div class="">
+            <div class="mx-2 my-2 border bg-white rounded-2">
+                {{-- Header --}}
+                <div class="mx-3">
+                    <div class="pt-3 d-flex justify-content-between">
+                        <h5 class="my-0 align-self-center text-dark inliner">Kesimpulan</h5>
+                    </div>
+                </div>
+                {{-- Deskriptif --}}
+                <div class="my-5 mx-3 ">
+                   <p class="text-danger text-center fs-3">Data terlalu sedikit, silahkan tambahkan nilai siswa</p>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 @endsection

@@ -15,14 +15,9 @@ class CreateSawTopsesTable extends Migration
     {
         Schema::create('saw_topses', function (Blueprint $table) {
             $table->id();
-            $table->json('matriks_x');
-            $table->double('max_x');
+            $table->string('nama');
             $table->json('normalisasi_matriks_r'); //Normalisasi matrix R
             $table->json('normalisasi_matriks_y'); //Normalisasi matrix Y (pembobotan)
-            $table->double('solusi_ideal_positif'); //Solusi ideal positif (A+)
-            $table->double('solusi_ideal_negatif'); //Solusi ideal negatif (A-)
-            $table->double('jarak_terbobot_a_positif'); //Jarak Terbobot(D+) antara nilai tiap alternatif dgn Solusi ideal positif (A+)
-            $table->double('jarak_terbobot_a_negatif'); //Jarak Terbobot(D-) antara nilai tiap alternatif dgn Solusi ideal negatif (A-)
             $table->double('nilai_preferensi'); //Nilai preferensi tiap alternatif
             $table->timestamps();
         });

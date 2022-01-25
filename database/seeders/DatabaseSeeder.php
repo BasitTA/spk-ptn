@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Kriteria;
 use App\Models\NilaiSiswa;
@@ -15,93 +16,134 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run(){
-        Siswa::factory(5)->create();
+        // Siswa::factory(5)->create();
 
-        // NilaiSiswa::create([
-        //     'nama' => 'Basit S.Kom',
-        //     'pilihan' => [
-        //         'a',
-        //         'b',
-        //         'c',
-        //         'd',
-        //         '1',
-        //         '2',
-        //     ],
-        // ]);
+        //USER
+        User::create([
+            'name' => 'basit',
+            'username' => 'basit_eng',
+            'email' => 'bta.aang@gmail.com',
+            //pass: 12345
+            'password' => '$2y$10$Wxxqb0NQZnpNW.o/IlHcKOETgypKMR2Nl5AbKedPhYi1qNgbkP/2S',
+        ]);
 
-        // NilaiSiswa::create([
-        //     'nama' => 'Bunga',
-        //     'pilihan' => [
-        //         'e',
-        //         'f',
-        //         'g',
-        //         'h',
-        //         '3',
-        //         '4'
-        //     ],
-        // ]);
-        // NilaiSiswa::create([
-        //     'nama' => 'Abdul',
-        //     'pilihan' => [
-        //         'i',
-        //         'j',
-        //         'k',
-        //         'l',
-        //         '5',
-        //         '6',
-        //     ],
-        // ]);
+        //SISWA
+        Siswa::create([
+            'nilai_siswa_id' => 1,
+            'nama' => 'Andri',
+            'jk' => 'L',
+            'tempat_lahir' => 'Jakarta',
+            'tanggal_lahir' => '12-06-2006',
+            'alamat' => 'Jl. Taruna Putri No. 7, Bogor, Jawa Barat'
+        ]);
+        
+        Siswa::create([
+            'nilai_siswa_id' => 2,
+            'nama' => 'Sopyan',
+            'jk' => 'L',
+            'tempat_lahir' => 'Tangerang',
+            'tanggal_lahir' => '04-06-2004',
+            'alamat' => 'Jl. Parangtritis No. 53, Tangerang, Banten'
+        ]);
 
-        // NilaiSiswa::factory(3)->create();
-        // Siswa::create([
-        //     'nama' => 'Basit',
-        //     'jk' => 'L',
-        //     'ttl' => '16 Juni 1998',
-        //     'alamat' => 'jl.abc, tangerang'
-        // // ],
-        // // [
-        // //     'nama' => 'Abdul',
-        // //     'jk' => 'L',
-        // //     'ttl' => '06 Juli 1998',
-        // //     'alamat' => 'jl.abc, jakarta'
-        // // ],
-        // // [
-        // //     'nama' => 'Bunga',
-        // //     'jk' => 'P',
-        // //     'ttl' => '16 Agustus 1998',
-        // //     'alamat' => 'jl.abc, bekasi'
-        // ]);
+        Siswa::create([
+            'nilai_siswa_id' => 3,
+            'nama' => 'Taufiq',
+            'jk' => 'L',
+            'tempat_lahir' => 'Tasikmalaya',
+            'tanggal_lahir' => '10-11-2004',
+            'alamat' => 'Jl. Tretes Raya No. 23, Tangerang, Banten'
+        ]);
 
-        // [
-        //     'nama' => 'Basit',
-        //     'c1' => '91',
-        //     'c2' => '90',
-        //     'c3' => '82',
-        //     'c4' => '88',
-        //     'c5' => '93',
-        //     'c6' => '87',
-        // ],
-        // [
-        //     'nama' => 'Bunga',
-        //     'c1' => '81',
-        //     'c2' => '90',
-        //     'c3' => '86',
-        //     'c4' => '80',
-        //     'c5' => '87',
-        //     'c6' => '89',
-        // ],
-        // [
-        //     'nama' => 'Abdul',
-        //     'c1' => '71',
-        //     'c2' => '80',
-        //     'c3' => '87',
-        //     'c4' => '89',
-        //     'c5' => '90',
-        //     'c6' => '92',
-        // ],
+        Siswa::create([
+            'nilai_siswa_id' => 4,
+            'nama' => 'Ramadhan',
+            'jk' => 'L',
+            'tempat_lahir' => 'Bogor',
+            'tanggal_lahir' => '10-11-2008',
+            'alamat' => 'Jl. Purwanasari No. 5, Bogor, Jawa Barat'
+        ]);
+
+        Siswa::create([
+            'nilai_siswa_id' => 5,
+            'nama' => 'Ibrahim',
+            'jk' => 'L',
+            'tempat_lahir' => 'Sumedang',
+            'tanggal_lahir' => '02-04-2003',
+            'alamat' => 'Jl. Medan Raya No. 8, Tangerang, Banten'
+        ]);
+
+        //NILAI SISWA
+        NilaiSiswa::create([
+            'id' => 1,
+            'nama' => 'Andri',
+            'pilihan' => [
+                2,
+                2,
+                3,
+                2,
+                4,
+                4
+            ],
+        ]);
+
+        NilaiSiswa::create([
+            'id' => 2,
+            'nama' => 'Sopyan',
+            'pilihan' => [
+                3,
+                3,
+                3,
+                3,
+                2,
+                3
+            ],
+        ]);
+
+        NilaiSiswa::create([
+            'id' => 3,
+            'nama' => 'Taufiq',
+            'pilihan' => [
+                4,
+                3,
+                4,
+                3,
+                3,
+                1
+            ],
+        ]);
+
+        NilaiSiswa::create([
+            'id' => 4,
+            'nama' => 'Ramadhan',
+            'pilihan' => [
+                2,
+                1,
+                3,
+                2,
+                2,
+                2
+            ],
+        ]);
+
+        NilaiSiswa::create([
+            'id' => 5,
+            'nama' => 'Ibrahim',
+            'pilihan' => [
+                3,
+                2,
+                4,
+                3,
+                1,
+                1
+            ],
+        ]);
+
+        //KRITERIA
         Kriteria::create([
             'kode' => 'C1',
             'nama' => 'Bacaan Quran',
+            'jenis' => 'Benefit',
             'bobot_kriteria' => 0.25,
             'pembobotan_kriteria' => [
                 [
@@ -122,9 +164,11 @@ class DatabaseSeeder extends Seeder
                 ],
             ]
         ]);
+        
         Kriteria::create([
             'kode' => 'C2',
             'nama' => 'Hafalan Quran',
+            'jenis' => 'Benefit',
             'bobot_kriteria' => 0.25,
             'pembobotan_kriteria' => [
                 [
@@ -145,9 +189,11 @@ class DatabaseSeeder extends Seeder
                 ],
             ]
         ]);
+
         Kriteria::create([
             'kode' => 'C3',
             'nama' => 'Bacaan Shalat',
+            'jenis' => 'Benefit',
             'bobot_kriteria' => 0.20,
             'pembobotan_kriteria' => [
                 [
@@ -168,9 +214,11 @@ class DatabaseSeeder extends Seeder
                 ],
             ]
         ]);
+
         Kriteria::create([
             'kode' => 'C4',
             'nama' => 'Tes Kepribadian',
+            'jenis' => 'Benefit',
             'bobot_kriteria' => 0.15,
             'pembobotan_kriteria' => [
                 [
@@ -191,32 +239,36 @@ class DatabaseSeeder extends Seeder
                 ],
             ]
         ]);
+
         Kriteria::create([
             'kode' => 'C5',
             'nama' => 'Penghasilan Orang Tua',
+            'jenis' => 'Cost',
             'bobot_kriteria' => 0.10,
             'pembobotan_kriteria' => [
                 [
-                    'pilihan' => '< 1 JT',
+                    'pilihan' => '> 10 JT',
                     'bobot' => 4 
                 ],
                 [
-                    'pilihan' => '1 JT - < 4.2 JT',
+                    'pilihan' => '4.2 JT - 10 JT',
                     'bobot' => 3 
                 ],
                 [
-                    'pilihan' => '4.2 JT - 10 JT',
+                    'pilihan' => '1 JT - < 4.2 JT',
                     'bobot' => 2 
                 ],
                 [
-                    'pilihan' => '> 10 JT',
+                    'pilihan' => '< 1 JT',
                     'bobot' => 1 
                 ],
             ]
         ]);
+
         Kriteria::create([
             'kode' => 'C6',
             'nama' => 'Status',
+            'jenis' => 'Benefit',
             'bobot_kriteria' => 0.05,
             'pembobotan_kriteria' => [
                 [

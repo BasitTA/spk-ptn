@@ -10,16 +10,16 @@
             <div class="mx-2 my-2 border rounded-2 justify-content-center">
                 <h5 class="text-center my-2">Bobot Kriteria</h5>
                 <div class="mx-2 my-2">
-                    <div class="mx-2 my-2 justify-content-end d-flex align-items-center">
+                    {{-- <div class="mx-2 my-2 justify-content-end d-flex align-items-center">
                         <p class="my-0 mx-2 text-end text-success"><b>*Total = 1</b></p>
                         <a href="#" type="button" class="btn btn-sm btn-warning">Ubah Data</a>
-                    </div>
+                    </div> --}}
                     <div class="mx-2 row table-responsive">
                         <table class="table table-bordered table-striped">
                             @foreach ($kriterias as $kriteria)
                             {{-- <tr class=""> --}}
                                 <td class="text-center">
-                                    <b><i>{{ $kriteria->kode }}</i></b>- {{ $kriteria->bobot_kriteria }}
+                                    <b><i>{{ $kriteria->kode }}</i></b> = {{ $kriteria->bobot_kriteria }}
                                 </td>
                             {{-- </tr> --}}
                             @endforeach
@@ -36,10 +36,15 @@
                     {{-- Header --}}
                     <div class="mx-3">
                         <div class="pt-3 d-flex justify-content-between">
-                            <h5 class="my-0 align-self-center text-dark inliner">{{ $kriteria->nama }}
-                                (<i>{{ $kriteria->kode }}</i>)</h5>
+                            <h6 class="my-0 align-self-center text-dark inliner">{{ $kriteria->nama }}
+                                (<i>{{ $kriteria->kode }}</i>)</h6>
                                 {{-- <h6 class="my-0 align-self-center">- {{ $kriteria->bobot_kriteria }}</h6> --}}
-                            <a href="#" type="button" class="align-self-center btn btn-sm btn-warning">Ubah Data</a>
+                                @if ($kriteria->jenis == 'Benefit')
+                                    <a class="badge align-self-center btn-success disabled">{{ $kriteria->jenis }}</a>
+                                @else
+                                    <a class="badge align-self-center btn-warning disabled">{{ $kriteria->jenis }}</a>
+                                @endif
+                            {{-- <a href="#" type="button" class="align-self-center btn btn-sm btn-warning">Ubah Data</a> --}}
                         </div>
                     </div>
                     {{-- Table --}}

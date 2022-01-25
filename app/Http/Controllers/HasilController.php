@@ -14,7 +14,7 @@ class HasilController extends Controller
     //     $kriteria = Kriteria::all();
     // }
 
-    protected $maxX, $normalisasi_matriks_r, $normalisasi_matriks_terbobot_y, $solusi_ideal_positif, $solusi_ideal_negatif, $jarak_terbobot_a_positif, $jarak_terbobot_a_negatif, $nilai_preferensi, $hasil_perangkingan = array();
+    protected $maxX, $minX, $normalisasi_matriks_r, $normalisasi_matriks_terbobot_y, $solusi_ideal_positif, $solusi_ideal_negatif, $jarak_terbobot_a_positif, $jarak_terbobot_a_negatif, $nilai_preferensi, $hasil_perangkingan = array();
     protected $nilai_siswa, $kriteria, $saw_topsis;
 
     function data(){
@@ -70,14 +70,9 @@ class HasilController extends Controller
             $saw_topsis_id = $ns->id;
             SawTopsis::create([
                 'id' => $saw_topsis_id,
-                'matriks_x' => $nilai_siswa[$x]->nama,
-                'max_x' => $this->maxX[0],
+                'nama' => $nilai_siswa[$x]->nama,
                 'normalisasi_matriks_r' => $this->normalisasi_matriks_r[$x],
                 'normalisasi_matriks_y' => $this->normalisasi_matriks_terbobot_y[$x],
-                'solusi_ideal_positif' => $this->solusi_ideal_positif[0],
-                'solusi_ideal_negatif' => $this->solusi_ideal_negatif[0],
-                'jarak_terbobot_a_positif' => $this->jarak_terbobot_a_positif[0],
-                'jarak_terbobot_a_negatif' => $this->jarak_terbobot_a_negatif[0],
                 'nilai_preferensi' => $this->nilai_preferensi[$x],
             ]);
             $x++;
@@ -95,6 +90,7 @@ class HasilController extends Controller
         $this->data();
         if($this->nilai_siswa->count()>1 && $this->kriteria->count()){  
             $this->hitungMaxX();
+            $this->hitungMinX();
             $this->normalisasiMatriksR();
             //TOPSIS
             $this->normalisasiMatriksTerbobotY();
@@ -138,8 +134,36 @@ class HasilController extends Controller
                 max($p5),
                 max($p6)
             ];
-
             // dd($this->maxX);
+        }else {
+            // dd('Data tidak cukup, masukkan minimal 2 data nilai siswa');
+        }
+    }
+
+    function hitungMinX(){
+        //p = pilihan
+        $p1 = $p2 = $p3 = $p4 = $p5 = $p6 = array();
+
+        if($this->nilai_siswa->count()>1){
+            // dd($this->nilai_siswa->count());
+            foreach($this->nilai_siswa as $ns){
+                $p1[] = $ns['pilihan'][0];
+                $p2[] = $ns['pilihan'][1];
+                $p3[] = $ns['pilihan'][2];
+                $p4[] = $ns['pilihan'][3];
+                $p5[] = $ns['pilihan'][4];
+                $p6[] = $ns['pilihan'][5];
+            };
+
+            $this->minX = [
+                min($p1),
+                min($p2),
+                min($p3),
+                min($p4),
+                min($p5),
+                min($p6)
+            ];
+            // dd($this->minX);
         }else {
             // dd('Data tidak cukup, masukkan minimal 2 data nilai siswa');
         }
@@ -174,7 +198,7 @@ class HasilController extends Controller
                 $normalisasi_matriks_r4[] = $k4/$this->maxX[3];
             }
             foreach($kriteria5 as $k5){
-                $normalisasi_matriks_r5[] = $k5/$this->maxX[4];
+                $normalisasi_matriks_r5[] = $this->minX[4]/$k5;
             }
             foreach($kriteria6 as $k6){
                 $normalisasi_matriks_r6[] = $k6/$this->maxX[5];

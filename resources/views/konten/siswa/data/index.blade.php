@@ -71,7 +71,7 @@
                     </table>
                 </div>
             @else
-                <p class="text-center fs-4">Belum ada data yang diinput</p>
+                <p class="my-5 text-danger text-center fs-3">Belum ada data yang diinput, silahkan tambah data</p>
             @endif
         </div>
     </div>
