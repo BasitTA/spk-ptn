@@ -8,7 +8,7 @@
 
 @if ($nilai_siswas->count()>1)
     <div class="row col-lg-10 g-0 bg-light px-2 py-2">
-        {{-- Kesimpulan --}}
+       {{-- Kesimpulan --}}
         <div class="">
             <div class="mx-2 my-2 border rounded-2">
                 {{-- Header --}}
@@ -31,6 +31,7 @@
                 <div class="mx-3">
                     <div class="pt-3 d-flex justify-content-between">
                         <h5 class="my-0 align-self-center text-dark inliner">Hasil Perangkingan</h5>
+                        <a href="cetakhasilperhitungan" type="button" class="btn btn-sm btn-primary"><i class="bi bi-printer"></i> Cetak</a>
                     </div>
                 </div>
                 {{-- Table --}}
@@ -436,5 +437,10 @@
             </div>
         </div>
     </div>
+
 @endif
 @endsection
+
+{{-- <script type="text/javascript">
+    window.print();
+</script> --}}

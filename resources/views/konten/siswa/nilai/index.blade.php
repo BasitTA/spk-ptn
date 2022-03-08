@@ -31,7 +31,11 @@
         <div class="bg-white border rounded-3">
             <div class="pt-3 mx-3 justify-content-between d-flex">
                 <h5 class="my-0 align-self-center">Nilai Siswa</h5>
-                <a href="/nilaisiswa/nilaibaru" type="button" class="align-self-center btn btn-sm btn-success">Tambah Data</a>
+                <div>
+                    <a href="/nilaisiswa/nilaibaru" type="button" class="align-self-center btn btn-sm btn-success"><i class="bi bi-plus-lg"></i> Tambah</a>
+                    <a href="cetaknilaisiswa" type="button" class="align-self-center btn btn-sm btn-primary"><i class="bi bi-printer"></i> Cetak</a>
+                </div>
+                
             </div>
             @if ($nilai_siswas->count())
                 <div class="mt-3 mx-3 table-responsive">
@@ -58,11 +62,12 @@
                                         <td>{{ $pilihan }}</td>
                                     @endforeach
                                     <td>
-                                        <a href="/nilaisiswa/{{ $ns->id }}/edit">E</a>
+                                        <a class="align-middle" href="#"><i class="text-primary bi bi-eye-fill"></i></a>
+                                        <a class="align-middle" href="/nilaisiswa/{{ $ns->id }}/edit"><i class="text-warning bi bi-pencil-square"></i></a>
                                         <form class="d-inline" action="/nilaisiswa/{{ $ns->id }}" method="post">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data?')">D</button>
+                                            <button class="px-0 btn btn-link" onclick="return confirm('Apakah anda yakin untuk menghapus data?')"><i class="text-danger bi bi-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>

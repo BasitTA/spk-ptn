@@ -9,7 +9,8 @@ class KriteriaController extends Controller
 {
     public function index(){
         return view('konten.kriteria.index',[
-            'title' => 'Kriteria',
+            'active' => 3,
+            'title' => 'Data Kriteria',
             'kriterias' => Kriteria::all()
         ]);
     }

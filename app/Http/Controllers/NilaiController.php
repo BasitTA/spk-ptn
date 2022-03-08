@@ -11,6 +11,7 @@ class NilaiController extends Controller
 {
     public function index(){
         return view('konten.siswa.nilai.index',[
+            'active' => 2,
             'title' => 'Nilai Siswa',
             'siswas' => Siswa::latest()->get(),
             'nilai_siswas' => NilaiSiswa::latest()->filter(request(['search']))->get()
@@ -19,6 +20,7 @@ class NilaiController extends Controller
     
     public function create(){
         return view('konten.siswa.nilai.create',[
+            'active' => 2,
             'title' => 'Nilai Baru',
             'siswas' => Siswa::orderBy('nama')->get(),
             'kriterias' => Kriteria::all()
@@ -57,6 +59,7 @@ class NilaiController extends Controller
         $tanggal_lahir = Siswa::where('nilai_siswa_id',$id->id)->first()->tanggal_lahir;
 
         return view('konten.siswa.nilai.edit',[
+            'active' => 2,
             'title' => 'Ubah Nilai Siswa',
             'nilai_siswa' => $id,
             'tanggal_lahir' => $tanggal_lahir,
@@ -82,5 +85,14 @@ class NilaiController extends Controller
         ]);
 
         return redirect('/nilaisiswa')->with('success', 'Data berhasil diupdate');
+    }
+
+    public function print(){
+        return view('konten.siswa.nilai.print',[
+            'active' => 2,
+            'title' => 'Cetak Nilai Siswa',
+            'siswas' => Siswa::latest()->get(),
+            'nilai_siswas' => NilaiSiswa::latest()->filter(request(['search']))->get()
+        ]);
     }
 }

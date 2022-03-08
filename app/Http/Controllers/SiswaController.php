@@ -11,7 +11,8 @@ class SiswaController extends Controller
 {
     public function index(){
         return view('konten.siswa.data.index',[
-            'title' => 'Siswa',
+            'active' => 1,
+            'title' => 'Data Siswa',
             'siswas' => Siswa::latest()->filter(request(['search']))->get(),
             'nilai_siswas' => NilaiSiswa::latest()->get()
         ]);
@@ -19,6 +20,7 @@ class SiswaController extends Controller
 
     public function create(){
         return view('konten.siswa.data.create',[
+            'active' => 1,
             'title' => 'Siswa Baru',
             'jk' => [
                 0 => 'L',
@@ -29,6 +31,7 @@ class SiswaController extends Controller
 
     public function show(Siswa $id){
         return view('konten.siswa.data.show',[
+            'active' => 1,
             'title' => 'Calon Siswa',
             'siswas' => $id
         ]);
@@ -86,6 +89,7 @@ class SiswaController extends Controller
 
     public function edit(Siswa $id){
         return view('konten.siswa.data.edit',[
+            'active' => 1,
             'title' => 'Ubah Data Siswa',
             'siswa' => $id,
             // dd($id->nama),
@@ -132,5 +136,14 @@ class SiswaController extends Controller
                     ]);
             return redirect('/siswa')->with('success', 'Data berhasil diubah');
         }
+    }
+
+    public function print(){
+        return view('konten.siswa.data.print',[
+            'active' => 1,
+            'title' => 'Cetak Data Siswa',
+            'siswas' => Siswa::latest()->filter(request(['search']))->get(),
+            'nilai_siswas' => NilaiSiswa::latest()->get()
+        ]);
     }
 }

@@ -20,6 +20,43 @@
     border-radius: 0;
   }
 
+  .bg-modern-black{
+    background-color: #17252a;
+  }
+
+  .bg-modern-light-green{
+    background-color: #def2f1;
+  }
+
+  .bg-modern-green{
+    background-color: #3aafa9;
+  }
+
+  .icon{
+    height: 50px;
+    width: 50px;
+  }
+
   a{
     text-decoration :none;
+  }
+
+  nav ul li a:hover{
+    color: #12a34a!important;
+  }
+
+  .active{
+    color: #0e833b!important;
+    font-weight: 500;
+  }
+
+  @media print{    
+      .no-print, .no-print *
+      {
+          display: none !important;
+      }
+  }
+
+  .smaller-font{
+    font-size: 0.8em;
   }

@@ -16,7 +16,10 @@
 
 <body>
     {{-- Top-Navbar --}}
-    @include('partials.navbar')
+    <div class="sticky-top">
+
+        @include('partials.navbar')
+    </div>
 
     <div class="navbar-expand-lg row mx-0 g-0 justify-content-center">
         {{-- Sidebar --}}

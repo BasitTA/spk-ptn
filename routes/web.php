@@ -31,6 +31,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 //DATA SISWA
 Route::get('/', [SiswaController::class, 'index'])->middleware('auth');
 Route::get('/siswa', [SiswaController::class, 'index'])->middleware('auth');
+Route::get('/cetakdatasiswa', [SiswaController::class, 'print'])->middleware('auth');
 Route::get('/siswa/siswabaru', [SiswaController::class, 'create'])->middleware('auth');
 Route::post('/siswa/siswabaru', [SiswaController::class, 'store'])->middleware('auth');
 Route::get('/siswa/{id}', [SiswaController::class, 'show'])->middleware('auth');
@@ -40,6 +41,7 @@ Route::put('/siswa/{id}', [SiswaController::class, 'update'])->middleware('auth'
 
 //NILAI SISWA
 Route::get('/nilaisiswa', [NilaiController::class, 'index'])->middleware('auth');
+Route::get('/cetaknilaisiswa', [NilaiController::class, 'print'])->middleware('auth');
 Route::get('/nilaisiswa/nilaibaru', [NilaiController::class, 'create'])->middleware('auth');
 Route::post('/nilaisiswa/nilaibaru', [NilaiController::class, 'store'])->middleware('auth');
 Route::delete('/nilaisiswa/{id}', [NilaiController::class, 'destroy'])->middleware('auth');
@@ -51,3 +53,4 @@ Route::get('/kriteria', [KriteriaController::class, 'index'])->middleware('auth'
 
 //HASIL PERHITUNGAN
 Route::get('/hasilperhitungan', [HasilController::class, 'index'])->middleware('auth');
+Route::get('/cetakhasilperhitungan', [HasilController::class, 'print'])->middleware('auth');

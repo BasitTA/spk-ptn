@@ -367,6 +367,7 @@ class HasilController extends Controller
     public function index(){
         $this->main();
         return view('konten.hasil perhitungan.index',[
+            'active' => 4,
             'title' => 'Hasil Perhitungan',
             'nilai_siswas' => NilaiSiswa::all(),
             'hasil_perangkingan' => $this->hasil_perangkingan,
@@ -379,4 +380,22 @@ class HasilController extends Controller
             'nilai_preferensi' => $this->nilai_preferensi
         ]);
     }
+
+    public function print(){
+        $this->main();
+        return view('konten.hasil perhitungan.print',[
+            'active' => 4,
+            'title' => 'Cetak Hasil Perhitungan',
+            'nilai_siswas' => NilaiSiswa::all(),
+            'hasil_perangkingan' => $this->hasil_perangkingan,
+            'normalisasi_matriks_r' => $this->normalisasi_matriks_r,
+            'normalisasi_matriks_terbobot_y' => $this->normalisasi_matriks_terbobot_y,
+            'solusi_ideal_positif' => $this->solusi_ideal_positif,
+            'solusi_ideal_negatif' => $this->solusi_ideal_negatif,
+            'jarak_terbobot_a_positif' => $this->jarak_terbobot_a_positif,
+            'jarak_terbobot_a_negatif' => $this->jarak_terbobot_a_negatif,
+            'nilai_preferensi' => $this->nilai_preferensi
+        ]);
+    }
+    
 }
