@@ -19,7 +19,7 @@
                             @foreach ($kriterias as $kriteria)
                             {{-- <tr class=""> --}}
                                 <td class="text-center">
-                                    <b><i>{{ $kriteria->kode }}</i></b> = {{ $kriteria->bobot_kriteria }}
+                                    <b>{{ $kriteria->kode }}</b> = {{ $kriteria->bobot_kriteria }}
                                 </td>
                             {{-- </tr> --}}
                             @endforeach

@@ -59,7 +59,7 @@
         </div>
 
 
-        <hr><hr>
+        <hr>
 
         {{-- Data Calon Siswa --}}
         {{-- Table 1 --}}

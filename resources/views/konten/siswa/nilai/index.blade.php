@@ -62,7 +62,7 @@
                                         <td>{{ $pilihan }}</td>
                                     @endforeach
                                     <td>
-                                        <a class="align-middle" href="#"><i class="text-primary bi bi-eye-fill"></i></a>
+                                        {{-- <a class="align-middle" href="#"><i class="text-primary bi bi-eye-fill"></i></a> --}}
                                         <a class="align-middle" href="/nilaisiswa/{{ $ns->id }}/edit"><i class="text-warning bi bi-pencil-square"></i></a>
                                         <form class="d-inline" action="/nilaisiswa/{{ $ns->id }}" method="post">
                                             @method('delete')

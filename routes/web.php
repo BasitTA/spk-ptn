@@ -50,6 +50,8 @@ Route::put('/nilaisiswa/{id}', [NilaiController::class, 'update'])->middleware('
 
 //KRITERIA
 Route::get('/kriteria', [KriteriaController::class, 'index'])->middleware('auth');
+// Route::get('/kriteria/kriteriabaru', [KriteriaController::class, 'create'])->middleware('auth');
+// Route::post('/kriteria/kriteriabaru', [KriteriaController::class, 'store'])->middleware('auth');
 
 //HASIL PERHITUNGAN
 Route::get('/hasilperhitungan', [HasilController::class, 'index'])->middleware('auth');
