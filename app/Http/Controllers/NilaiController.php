@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\Kriteria;
 use App\Models\NilaiSiswa;
+use Illuminate\Support\Facades\Auth;
 
 class NilaiController extends Controller
 {
@@ -13,6 +14,7 @@ class NilaiController extends Controller
         return view('konten.siswa.nilai.index',[
             'active' => 2,
             'title' => 'Nilai Siswa',
+            'user' => Auth::user(),
             'siswas' => Siswa::latest()->get(),
             'nilai_siswas' => NilaiSiswa::latest()->filter(request(['search']))->get()
         ]);
@@ -22,6 +24,7 @@ class NilaiController extends Controller
         return view('konten.siswa.nilai.create',[
             'active' => 2,
             'title' => 'Nilai Baru',
+            'user' => Auth::user(),
             'siswas' => Siswa::orderBy('nama')->get(),
             'kriterias' => Kriteria::all()
         ]);
@@ -61,6 +64,7 @@ class NilaiController extends Controller
         return view('konten.siswa.nilai.edit',[
             'active' => 2,
             'title' => 'Ubah Nilai Siswa',
+            'user' => Auth::user(),
             'nilai_siswa' => $id,
             'tanggal_lahir' => $tanggal_lahir,
             'siswas' => Siswa::orderBy('nama')->get(),
@@ -91,6 +95,7 @@ class NilaiController extends Controller
         return view('konten.siswa.nilai.print',[
             'active' => 2,
             'title' => 'Cetak Nilai Siswa',
+            'user' => Auth::user(),
             'siswas' => Siswa::latest()->get(),
             'nilai_siswas' => NilaiSiswa::latest()->filter(request(['search']))->get()
         ]);

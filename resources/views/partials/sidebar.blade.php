@@ -3,6 +3,9 @@
     <nav class="mx-0 align-items-start justify-content-center collapse navbar-collapse col-md-3 col-lg-2 pt-3"
         id="navbarRight">
         <ul class="mx-0 navbar-nav flex-column d-flex justify-content-center ">
+            {{-- <li class="mx-0 nav-item pb-0">
+                <p class="truncate smaller-font text-uppercase mx-0 me-1 px-2"><i class="bi bi-person-circle"></i><small class="text-capitalize smaller-font"> {{ $user->name }} ({{ $user->level }})</small></p>
+            </li> --}}
             <li class="mx-0 nav-item pb-2">
                 <a class="nav-link text-dark mx-0 px-2 {{ ($active === 1) ? 'active' : '' }}" href="/siswa"><i class="bi bi-file-earmark-text"></i> Data Siswa</a>
             </li>

@@ -16,8 +16,22 @@
 
 <body>
     <div class="col-lg-12 g-0 px-2 pt-3">
-        {{-- Kembali --}}
-        <a href="hasilperhitungan" class="no-print ps-2"><i class="bi bi-chevron-left"></i> Kembali</a>
+        <div class="d-flex justify-content-between mx-2">
+            {{-- Kembali --}}
+            @if (auth()->user()->level=="admin" || auth()->user()->level=="kepsek")
+                <a href="hasilperhitungan" class="no-print ps-2"><i class="bi bi-chevron-left"></i> Kembali</a>
+            @endif
+        </div>
+        
+        @if (auth()->user()->level=="user")
+            <div class="d-flex justify-content-end">
+                <a onClick="window.print()" type="button" class="no-print btn btn-sm btn-primary"><i class="bi bi-printer"></i> Cetak</a>    
+                <form class="my-0 ms-1 me-3 no-print" action="/logout" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                </form>
+            </div>
+        @endif
     
         {{-- Nilai Preferensi (Ranking) --}}
         <div class="bg-white">

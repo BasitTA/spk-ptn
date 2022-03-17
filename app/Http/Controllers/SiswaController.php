@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\NilaiSiswa;
 use App\Models\Kriteria;
 use App\Models\Siswa;
+use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller
 {
@@ -13,6 +14,7 @@ class SiswaController extends Controller
         return view('konten.siswa.data.index',[
             'active' => 1,
             'title' => 'Data Siswa',
+            'user' => Auth::user(),
             'siswas' => Siswa::latest()->filter(request(['search']))->get(),
             'nilai_siswas' => NilaiSiswa::latest()->get()
         ]);
@@ -22,6 +24,7 @@ class SiswaController extends Controller
         return view('konten.siswa.data.create',[
             'active' => 1,
             'title' => 'Siswa Baru',
+            'user' => Auth::user(),
             'jk' => [
                 0 => 'L',
                 1 => 'P'
@@ -33,6 +36,7 @@ class SiswaController extends Controller
         return view('konten.siswa.data.show',[
             'active' => 1,
             'title' => 'Calon Siswa',
+            'user' => Auth::user(),
             'siswas' => $id
         ]);
     }
@@ -91,6 +95,7 @@ class SiswaController extends Controller
         return view('konten.siswa.data.edit',[
             'active' => 1,
             'title' => 'Ubah Data Siswa',
+            'user' => Auth::user(),
             'siswa' => $id,
             // dd($id->nama),
             'jk' => [
@@ -142,6 +147,7 @@ class SiswaController extends Controller
         return view('konten.siswa.data.print',[
             'active' => 1,
             'title' => 'Cetak Data Siswa',
+            'user' => Auth::user(),
             'siswas' => Siswa::latest()->filter(request(['search']))->get(),
             'nilai_siswas' => NilaiSiswa::latest()->get()
         ]);

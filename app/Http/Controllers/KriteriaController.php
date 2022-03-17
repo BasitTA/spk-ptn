@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kriteria;
+use Illuminate\Support\Facades\Auth;
 
 class KriteriaController extends Controller
 {
@@ -11,6 +12,7 @@ class KriteriaController extends Controller
         return view('konten.kriteria.index',[
             'active' => 3,
             'title' => 'Data Kriteria',
+            'user' => Auth::user(),
             'kriterias' => Kriteria::all()
         ]);
     }
@@ -19,6 +21,7 @@ class KriteriaController extends Controller
         return view('konten.kriteria.create',[
             'active' => 1,
             'title' => 'Kriteria Baru',
+            'user' => Auth::user(),
             'kriterias' => Kriteria::all()
         ]);
     }

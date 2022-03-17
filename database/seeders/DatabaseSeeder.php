@@ -20,9 +20,26 @@ class DatabaseSeeder extends Seeder
 
         //USER
         User::create([
-            'name' => 'basit',
-            'username' => 'basit_eng',
-            'email' => 'bta.aang@gmail.com',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'level' => 'admin',
+            //pass: 12345
+            'password' => '$2y$10$Wxxqb0NQZnpNW.o/IlHcKOETgypKMR2Nl5AbKedPhYi1qNgbkP/2S',
+        ]);
+
+        //USER
+        User::create([
+            'name' => 'Ali Ashari',
+            'email' => 'ali@gmail.com',
+            'level' => 'kepsek',
+            //pass: 12345
+            'password' => '$2y$10$Wxxqb0NQZnpNW.o/IlHcKOETgypKMR2Nl5AbKedPhYi1qNgbkP/2S',
+        ]);
+
+        User::create([
+            'name' => 'Basit',
+            'email' => 'basit@gmail.com',
+            'level' => 'user',
             //pass: 12345
             'password' => '$2y$10$Wxxqb0NQZnpNW.o/IlHcKOETgypKMR2Nl5AbKedPhYi1qNgbkP/2S',
         ]);

@@ -32,7 +32,9 @@
             <div class="pt-3 mx-3 justify-content-between d-flex">
                 <h5 class="my-0 align-self-center">Nilai Siswa</h5>
                 <div>
-                    <a href="/nilaisiswa/nilaibaru" type="button" class="align-self-center btn btn-sm btn-success"><i class="bi bi-plus-lg"></i> Tambah</a>
+                    @if (auth()->user()->level=="admin")
+                        <a href="/nilaisiswa/nilaibaru" type="button" class="align-self-center btn btn-sm btn-success"><i class="bi bi-plus-lg"></i> Tambah</a>
+                    @endif
                     <a href="cetaknilaisiswa" type="button" class="align-self-center btn btn-sm btn-primary"><i class="bi bi-printer"></i> Cetak</a>
                 </div>
                 
@@ -50,7 +52,10 @@
                                 <th scope="col">C4</th>
                                 <th scope="col">C5</th>
                                 <th scope="col">C6</th>
-                                <th scope="col">Aksi</th>
+                                {{-- ADMIN ONLY --}}
+                                @if (auth()->user()->level=="admin")
+                                    <th scope="col">Aksi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -61,15 +66,18 @@
                                     @foreach ($ns->pilihan as $pilihan)
                                         <td>{{ $pilihan }}</td>
                                     @endforeach
-                                    <td>
-                                        {{-- <a class="align-middle" href="#"><i class="text-primary bi bi-eye-fill"></i></a> --}}
-                                        <a class="align-middle" href="/nilaisiswa/{{ $ns->id }}/edit"><i class="text-warning bi bi-pencil-square"></i></a>
-                                        <form class="d-inline" action="/nilaisiswa/{{ $ns->id }}" method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="px-0 btn btn-link" onclick="return confirm('Apakah anda yakin untuk menghapus data?')"><i class="text-danger bi bi-trash"></i></button>
-                                        </form>
-                                    </td>
+                                    {{-- ADMIN ONLY --}}
+                                    @if (auth()->user()->level=="admin")
+                                        <td>
+                                            {{-- <a class="align-middle" href="#"><i class="text-primary bi bi-eye-fill"></i></a> --}}
+                                            <a class="align-middle" href="/nilaisiswa/{{ $ns->id }}/edit"><i class="text-warning bi bi-pencil-square"></i></a>
+                                            <form class="d-inline" action="/nilaisiswa/{{ $ns->id }}" method="post">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="px-0 btn btn-link" onclick="return confirm('Apakah anda yakin untuk menghapus data?')"><i class="text-danger bi bi-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

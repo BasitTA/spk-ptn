@@ -33,7 +33,10 @@
             <div class="pt-3 mx-3 justify-content-between d-flex">
                 <h5 class="my-0 align-self-center">Data Siswa</h5>
                 <div>
-                    <a href="siswa/siswabaru" type="button" class="align-self-center btn btn-sm btn-success"><i class="bi bi-plus-lg"></i> Tambah</a>
+                    {{-- ADMIN ONLY --}}
+                    @if (auth()->user()->level=="admin")
+                        <a href="siswa/siswabaru" type="button" class="align-self-center btn btn-sm btn-success"><i class="bi bi-plus-lg"></i> Tambah</a>
+                    @endif
                     <a href="cetakdatasiswa" type="button" class="align-self-center btn btn-sm btn-primary"><i class="bi bi-printer"></i> Cetak</a>
                 </div>
             </div>
@@ -61,12 +64,15 @@
                                     <td>{{ $siswa->tanggal_lahir }}</td>
                                     <td>
                                         <a class="align-middle" href="/siswa/{{ $siswa->id }}"><i class="text-primary bi bi-eye-fill"></i></a>
+                                        {{-- ADMIN ONLY --}}
+                                        @if (auth()->user()->level=="admin")
                                         <a class="align-middle" href="/siswa/{{ $siswa->id }}/edit"><i class="text-warning bi bi-pencil-square"></i></a>
-                                        <form class="d-inline" action="/siswa/{{ $siswa->id }}-{{ $siswa->nilai_siswa_id }}" method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button class="px-0 btn btn-link" onclick="return confirm('Apakah anda yakin untuk menghapus data?')"><i class="text-danger bi bi-trash"></i></button>
-                                        </form>
+                                            <form class="d-inline" action="/siswa/{{ $siswa->id }}-{{ $siswa->nilai_siswa_id }}" method="post">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="px-0 btn btn-link" onclick="return confirm('Apakah anda yakin untuk menghapus data?')"><i class="text-danger bi bi-trash"></i></button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

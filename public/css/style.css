@@ -57,6 +57,13 @@
       }
   }
 
+  .truncate{
+    white-space: nowrap;
+    width: 15em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .smaller-font{
     font-size: 0.8em;
   }

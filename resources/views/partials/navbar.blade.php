@@ -14,6 +14,9 @@
         @auth
             <div class="collapse navbar-collapse justify-content-end" id="navbarRight">
                 <ul class="navbar-nav">
+                    <li class="nav-item py-2">
+                        <p class="text-light smaller-font text-uppercase mx-0 my-0 px-2"><i class="bi bi-person-circle"></i><small class="text-capitalize smaller-font"> {{ $user->name }} ({{ $user->level }})</small></p>
+                    </li>
                     <li class="nav-item">
                         <form class="my-0" action="/logout" method="post">
                             @csrf

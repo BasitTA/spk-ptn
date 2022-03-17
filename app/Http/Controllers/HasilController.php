@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\NilaiSiswa;
 use App\Models\Kriteria;
 use App\Models\SawTopsis;
+use Illuminate\Support\Facades\Auth;
 
 class HasilController extends Controller
 {
@@ -369,6 +370,7 @@ class HasilController extends Controller
         return view('konten.hasil perhitungan.index',[
             'active' => 4,
             'title' => 'Hasil Perhitungan',
+            'user' => Auth::user(),
             'nilai_siswas' => NilaiSiswa::all(),
             'hasil_perangkingan' => $this->hasil_perangkingan,
             'normalisasi_matriks_r' => $this->normalisasi_matriks_r,
@@ -386,6 +388,7 @@ class HasilController extends Controller
         return view('konten.hasil perhitungan.print',[
             'active' => 4,
             'title' => 'Cetak Hasil Perhitungan',
+            'user' => Auth::user(),
             'nilai_siswas' => NilaiSiswa::all(),
             'hasil_perangkingan' => $this->hasil_perangkingan,
             'normalisasi_matriks_r' => $this->normalisasi_matriks_r,
