@@ -28,8 +28,8 @@ class KriteriaController extends Controller
 
     public function store(Request $request){
         $pembobotan_kriteria = [
-            ['pilihan'=>$request->pilihan,
-             'bobot'=>$request->bobot],
+            ['pilihan'=>$request->pilihan, //Contoh: Nilai 80-100, 70-78, 60-69, <60
+             'bobot'=>$request->bobot], //Contoh: 4, 3, 2, 1
             // [$request->pilihan1, $request->bobot],
         ];
 

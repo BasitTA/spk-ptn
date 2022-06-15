@@ -15,10 +15,10 @@ class HasilController extends Controller
     //     $kriteria = Kriteria::all();
     // }
 
-    protected $maxX, $minX, $normalisasi_matriks_r, $normalisasi_matriks_terbobot_y, $solusi_ideal_positif, $solusi_ideal_negatif, $jarak_terbobot_a_positif, $jarak_terbobot_a_negatif, $nilai_preferensi, $hasil_perangkingan = array();
-    protected $nilai_siswa, $kriteria, $saw_topsis;
+    private $maxX, $minX, $normalisasi_matriks_r, $normalisasi_matriks_terbobot_y, $solusi_ideal_positif, $solusi_ideal_negatif, $jarak_terbobot_a_positif, $jarak_terbobot_a_negatif, $nilai_preferensi, $hasil_perangkingan = array();
+    private $nilai_siswa, $kriteria, $saw_topsis;
 
-    function data(){
+    private function data(){
         $this->nilai_siswa = NilaiSiswa::all();
         $this->kriteria = Kriteria::all();
         $this->saw_topsis = SawTopsis::all();
@@ -35,13 +35,13 @@ class HasilController extends Controller
     }
 
     //transpose array/matriks
-    function transposer(){
+    private function transposer(){
         $this->normalisasi_matriks_r = $this->transpose($this->normalisasi_matriks_r);
         $this->normalisasi_matriks_terbobot_y = $this->transpose($this->normalisasi_matriks_terbobot_y);
     }
 
     //pembulatan bilangan 2 angka desimal
-    function rounder(){
+    private function rounder(){
         $x = count($this->normalisasi_matriks_r);
         for ($i=0 ; $i<$x ; $i++) { 
             $this->normalisasi_matriks_r[$i] = $this->rounded($this->normalisasi_matriks_r[$i]);
@@ -59,7 +59,7 @@ class HasilController extends Controller
         $this->nilai_preferensi = $this->rounded($this->nilai_preferensi);
     }
 
-    public function storeHasilPerhitungan(){
+    private function storeHasilPerhitungan(){
         $nilai_siswa = $this->nilai_siswa;
         $kriteria = $this->kriteria;
         $saw_topsis = $this->saw_topsis;
@@ -81,13 +81,13 @@ class HasilController extends Controller
         // dd($this->saw_topsis);
     }
 
-    function sortPerangkingan(){
+    private function sortPerangkingan(){
         $data_sorted = SawTopsis::orderBy('nilai_preferensi','desc')->get();
         $this->hasil_perangkingan = $data_sorted;
         // dd($data_sorted);
     }
 
-    function main(){
+    private function main(){
         $this->data();
         if($this->nilai_siswa->count()>1 && $this->kriteria->count()){  
             $this->hitungMaxX();
@@ -112,7 +112,7 @@ class HasilController extends Controller
     }
 
     //SAW
-    function hitungMaxX(){
+    private function hitungMaxX(){
         //p = pilihan
         $p1 = $p2 = $p3 = $p4 = $p5 = $p6 = array();
 
@@ -141,7 +141,7 @@ class HasilController extends Controller
         }
     }
 
-    function hitungMinX(){
+    private function hitungMinX(){
         //p = pilihan
         $p1 = $p2 = $p3 = $p4 = $p5 = $p6 = array();
 
@@ -170,7 +170,7 @@ class HasilController extends Controller
         }
     }
 
-    function normalisasiMatriksR(){
+    private function normalisasiMatriksR(){
         $normalisasi_matriks_r1 = $normalisasi_matriks_r2= $normalisasi_matriks_r3= $normalisasi_matriks_r4= $normalisasi_matriks_r5= $normalisasi_matriks_r6 = array();
     
         // dd($this->maxX);
@@ -220,7 +220,7 @@ class HasilController extends Controller
     }
 
     //TOPSIS
-    function normalisasiMatriksTerbobotY(){
+    private function normalisasiMatriksTerbobotY(){
 
         $normalisasi_matriks_terbobot_y1 = $normalisasi_matriks_terbobot_y2 = $normalisasi_matriks_terbobot_y3 = $normalisasi_matriks_terbobot_y4 = $normalisasi_matriks_terbobot_y5 = $normalisasi_matriks_terbobot_y6 = array();
         $bobot = [
@@ -271,7 +271,7 @@ class HasilController extends Controller
             // dd($this->normalisasi_matriks_terbobot_y);
     }
 
-    function hitungSolusiIdealPositif(){
+    private function hitungSolusiIdealPositif(){
         $solusi_ideal_positif1 = $solusi_ideal_positif2 = $solusi_ideal_positif3 = $solusi_ideal_positif4 = $solusi_ideal_positif5 = $solusi_ideal_positif6 = array();
         $solusi_ideal_positif = array();
 
@@ -299,7 +299,7 @@ class HasilController extends Controller
         }
     }
 
-    function hitungSolusiIdealNegatif(){
+    private function hitungSolusiIdealNegatif(){
         $solusi_ideal_negatif1 = $solusi_ideal_negatif2 = $solusi_ideal_negatif3 = $solusi_ideal_negatif4 = $solusi_ideal_negatif5 = $solusi_ideal_negatif6 = array();
         $solusi_ideal_negatif = array();
 
@@ -327,7 +327,7 @@ class HasilController extends Controller
         }
     }
 
-    function hitungJarakTerbobotAPositif(){
+    private function hitungJarakTerbobotAPositif(){
         $normalisasi_matriks_terbobot_y = $this->normalisasi_matriks_terbobot_y;
         $solusi_ideal_positif = $this->solusi_ideal_positif;
         // $jarak_terbobot_a_positif1 = $jarak_terbobot_a_positif2 =$jarak_terbobot_a_positif3 = $jarak_terbobot_a_positif4 = $jarak_terbobot_a_positif5 = $jarak_terbobot_a_positif6 = null;
@@ -343,7 +343,8 @@ class HasilController extends Controller
         }
         // dd($this->jarak_terbobot_a_positif);
     }
-    function hitungJarakTerbobotANegatif(){
+    
+    private function hitungJarakTerbobotANegatif(){
         $normalisasi_matriks_terbobot_y = $this->normalisasi_matriks_terbobot_y;
         $solusi_ideal_negatif = $this->solusi_ideal_negatif;
 
@@ -359,7 +360,7 @@ class HasilController extends Controller
         // dd($this->jarak_terbobot_a_negatif);
     }
 
-    function hitungNilaiPreferensi(){
+    private function hitungNilaiPreferensi(){
         for ($i=0; $i < $this->nilai_siswa->count(); $i++) { 
             $this->nilai_preferensi[$i] = $this->jarak_terbobot_a_negatif[$i]/($this->jarak_terbobot_a_negatif[$i]+$this->jarak_terbobot_a_positif[$i]);
         }
