@@ -33,38 +33,43 @@
             </div>
         @endif
     
-        {{-- Nilai Preferensi (Ranking) --}}
-        <div class="bg-white">
-            <div class="pt-3">
-                {{-- Header --}}
-                <div class="mx-3">
-                    <div class="d-flex justify-content-between">
-                        <h5 class="my-0 align-self-center text-dark inliner">Hasil Perangkingan</h5>
+        @if($kuota[0]->kuota > 0)
+            {{-- Nilai Preferensi (Ranking) --}}
+            <div class="bg-white">
+                <div class="pt-3">
+                    {{-- Header --}}
+                    <div class="mx-3">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="my-0 align-self-center text-dark inliner">Data Siswa Diterima</h5>
+                        </div>
                     </div>
-                </div>
-                {{-- Table --}}
-                <div class="mt-3 mx-3 bg-light table-responsive">
-                    <table class="table table-striped">
-                        <thead class="table-success">
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Nama Siswa</th>
-                                <th scope="col">Nilai</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($hasil_perangkingan as $hp)
+                    {{-- Table --}}
+                    <div class="mt-3 mx-3 bg-light table-responsive">
+                        <table class="table table-striped">
+                            <thead class="table-success">
                                 <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $hp->nama }}</td>
-                                    <td>{{ $hp->nilai_preferensi }}</td>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nama Siswa</th>
+                                    <th scope="col">Nilai</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($hasil_perangkingan->slice(0, $kuota[0]->kuota) as $hp)
+                                    <tr>
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $hp->nama }}</td>
+                                        <td>{{ $hp->nilai_preferensi }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 mx-3">*Data di atas merupakan data siswa yang dinyatakan lulus, jika ingin melihat hasil penilaian lebih lanjut harap konfirmasi ke admin</div>
                 </div>
-            </div>
-        </div>    
+            </div>    
+        @else
+            <h5 class="d-flex my-5 justify-content-center">Mohon menunggu, data belum selesai diproses.. </h5>
+        @endif
     </div>
 
     <script type="text/javascript">

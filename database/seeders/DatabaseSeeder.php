@@ -156,6 +156,121 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
+        // Siswa::create([
+        //     'nilai_siswa_id' => 6,
+        //     'nama' => 'Cepi',
+        //     'jk' => 'L',
+        //     'tempat_lahir' => 'Tasik Malaya',
+        //     'tanggal_lahir' => '06-07-2004',
+        //     'alamat' => 'Jl. '
+        // ]);
+
+        // //NILAI SISWA
+        // NilaiSiswa::create([
+        //     'id' => 6,
+        //     'nama' => 'Cepi',
+        //     'pilihan' => [
+        //         3,
+        //         2,
+        //         3,
+        //         2,
+        //         3,
+        //         2
+        //     ],
+        // ]);
+
+        // Siswa::create([
+        //     'nilai_siswa_id' => 7,
+        //     'nama' => 'Shomad',
+        //     'jk' => 'L',
+        //     'tempat_lahir' => 'Tangerang',
+        //     'tanggal_lahir' => '14-07-2003',
+        //     'alamat' => 'Jl. '
+        // ]);
+
+        // //NILAI SISWA
+        // NilaiSiswa::create([
+        //     'id' => 7,
+        //     'nama' => 'Shomad',
+        //     'pilihan' => [
+        //         1,
+        //         2,
+        //         3,
+        //         2,
+        //         4,
+        //         4
+        //     ],
+        // ]);
+
+        // Siswa::create([
+        //     'nilai_siswa_id' => 8,
+        //     'nama' => 'Bisri',
+        //     'jk' => 'L',
+        //     'tempat_lahir' => 'Tangerang',
+        //     'tanggal_lahir' => '05-08-2002',
+        //     'alamat' => 'Jl. '
+        // ]);
+
+        // //NILAI SISWA
+        // NilaiSiswa::create([
+        //     'id' => 8,
+        //     'nama' => 'Bisri',
+        //     'pilihan' => [
+        //         1,
+        //         2,
+        //         3,
+        //         1,
+        //         2,
+        //         4
+        //     ],
+        // ]);
+
+        // Siswa::create([
+        //     'nilai_siswa_id' => 9,
+        //     'nama' => 'Wahab',
+        //     'jk' => 'L',
+        //     'tempat_lahir' => 'Tasik Malaya',
+        //     'tanggal_lahir' => '14-02-2003',
+        //     'alamat' => 'Jl. '
+        // ]);
+
+        // //NILAI SISWA
+        // NilaiSiswa::create([
+        //     'id' => 9,
+        //     'nama' => 'Wahab',
+        //     'pilihan' => [
+        //         1,
+        //         2,
+        //         1,
+        //         2,
+        //         1,
+        //         3
+        //     ],
+        // ]);
+
+        // Siswa::create([
+        //     'nilai_siswa_id' => 10,
+        //     'nama' => 'Amiruddin',
+        //     'jk' => 'L',
+        //     'tempat_lahir' => 'Sumedang',
+        //     'tanggal_lahir' => '01-09-2003',
+        //     'alamat' => 'Jl. '
+        // ]);
+
+        // //NILAI SISWA
+        // NilaiSiswa::create([
+        //     'id' => 10,
+        //     'nama' => 'Amiruddin',
+        //     'pilihan' => [
+        //         3,
+        //         2,
+        //         4,
+        //         1,
+        //         1,
+        //         1
+        //     ],
+        // ]);
+
         //KRITERIA
         Kriteria::create([
             'kode' => 'C1',

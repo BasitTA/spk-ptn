@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\NilaiSiswa;
 use App\Models\Kriteria;
 use App\Models\SawTopsis;
+use App\Models\Kuota;
 use Illuminate\Support\Facades\Auth;
 
 class HasilController extends Controller
@@ -18,12 +19,84 @@ class HasilController extends Controller
     private $maxX, $minX, $normalisasi_matriks_r, $normalisasi_matriks_terbobot_y, $solusi_ideal_positif, $solusi_ideal_negatif, $jarak_terbobot_a_positif, $jarak_terbobot_a_negatif, $nilai_preferensi, $hasil_perangkingan = array();
     private $nilai_siswa, $kriteria, $saw_topsis;
 
+    private function main(){
+        $this->data();
+        if($this->nilai_siswa->count()>1 && $this->kriteria->count()){  
+            $this->hitungMaxX();
+            $this->hitungMinX();
+            $this->normalisasiMatriksR();
+            //TOPSIS
+            $this->normalisasiMatriksTerbobotY();
+            $this->hitungSolusiIdealPositif();
+            $this->hitungSolusiIdealNegatif();
+            $this->hitungJarakTerbobotAPositif();
+            $this->hitungJarakTerbobotANegatif();
+            $this->hitungNilaiPreferensi();
+            $this->transposer();
+            $this->rounder();
+            $this->storeHasilPerhitungan();
+            $this->sortPerangkingan();
+            // dd("max",$this->maxX, "normalisasi matriks r",$this->normalisasi_matriks_r, "normalisasi matriks terbobot y",$this->normalisasi_matriks_terbobot_y, "solusi ideal positif",$this->solusi_ideal_positif, "solusi ideal negatif",$this->solusi_ideal_negatif, "jarak terbobot alternatif positif",$this->jarak_terbobot_a_positif, "jarak terbobot alternatif negatif",$this->jarak_terbobot_a_negatif, "nilai preferensi",$this->nilai_preferensi);
+        }else{
+            return redirect('/hasilperhitungan')->with('failed', 'Data tidak cukup, masukkan minimal 2 data nilai siswa');
+        }
+        // dd($this->nilai_preferensi);
+    }
+
+    public function store(Request $request){
+        $rules = [
+            'kuota' => 'required',
+        ];
+
+        $validated = $request->validate($rules);
+        Kuota::truncate();
+        Kuota::create($validated);
+        return redirect('/hasilperhitungan')->with('success', 'Kuota berhasil ditambahkan');
+    }
+
+    public function index(){
+        $this->main();
+        return view('konten.hasil perhitungan.index',[
+            'active' => 4,
+            'title' => 'Hasil Perhitungan',
+            'user' => Auth::user(),
+            'kuota' => Kuota::all(),
+            'nilai_siswas' => NilaiSiswa::all(),
+            'hasil_perangkingan' => $this->hasil_perangkingan,
+            'normalisasi_matriks_r' => $this->normalisasi_matriks_r,
+            'normalisasi_matriks_terbobot_y' => $this->normalisasi_matriks_terbobot_y,
+            'solusi_ideal_positif' => $this->solusi_ideal_positif,
+            'solusi_ideal_negatif' => $this->solusi_ideal_negatif,
+            'jarak_terbobot_a_positif' => $this->jarak_terbobot_a_positif,
+            'jarak_terbobot_a_negatif' => $this->jarak_terbobot_a_negatif,
+            'nilai_preferensi' => $this->nilai_preferensi
+        ]);
+    }
+
+    public function print(){
+        $this->main();
+        return view('konten.hasil perhitungan.print',[
+            'active' => 4,
+            'title' => 'Cetak Hasil Perhitungan',
+            'user' => Auth::user(),
+            'kuota' => Kuota::all(),
+            'nilai_siswas' => NilaiSiswa::all(),
+            'hasil_perangkingan' => $this->hasil_perangkingan,
+            'normalisasi_matriks_r' => $this->normalisasi_matriks_r,
+            'normalisasi_matriks_terbobot_y' => $this->normalisasi_matriks_terbobot_y,
+            'solusi_ideal_positif' => $this->solusi_ideal_positif,
+            'solusi_ideal_negatif' => $this->solusi_ideal_negatif,
+            'jarak_terbobot_a_positif' => $this->jarak_terbobot_a_positif,
+            'jarak_terbobot_a_negatif' => $this->jarak_terbobot_a_negatif,
+            'nilai_preferensi' => $this->nilai_preferensi
+        ]);
+    }
+
     private function data(){
         $this->nilai_siswa = NilaiSiswa::all();
         $this->kriteria = Kriteria::all();
         $this->saw_topsis = SawTopsis::all();
     }
-
 
     function transpose($array){
         array_unshift($array, null);
@@ -31,7 +104,7 @@ class HasilController extends Controller
     }
     
     function rounded($numbers){
-        return array_map(function($v) { return round($v, 2); }, $numbers);
+        return array_map(function($v) { return round($v, 3); }, $numbers);
     }
 
     //transpose array/matriks
@@ -85,30 +158,6 @@ class HasilController extends Controller
         $data_sorted = SawTopsis::orderBy('nilai_preferensi','desc')->get();
         $this->hasil_perangkingan = $data_sorted;
         // dd($data_sorted);
-    }
-
-    private function main(){
-        $this->data();
-        if($this->nilai_siswa->count()>1 && $this->kriteria->count()){  
-            $this->hitungMaxX();
-            $this->hitungMinX();
-            $this->normalisasiMatriksR();
-            //TOPSIS
-            $this->normalisasiMatriksTerbobotY();
-            $this->hitungSolusiIdealPositif();
-            $this->hitungSolusiIdealNegatif();
-            $this->hitungJarakTerbobotAPositif();
-            $this->hitungJarakTerbobotANegatif();
-            $this->hitungNilaiPreferensi();
-            $this->transposer();
-            $this->rounder();
-            $this->storeHasilPerhitungan();
-            $this->sortPerangkingan();
-            // dd("max",$this->maxX, "normalisasi matriks r",$this->normalisasi_matriks_r, "normalisasi matriks terbobot y",$this->normalisasi_matriks_terbobot_y, "solusi ideal positif",$this->solusi_ideal_positif, "solusi ideal negatif",$this->solusi_ideal_negatif, "jarak terbobot alternatif positif",$this->jarak_terbobot_a_positif, "jarak terbobot alternatif negatif",$this->jarak_terbobot_a_negatif, "nilai preferensi",$this->nilai_preferensi);
-        }else{
-            return redirect('/hasilperhitungan')->with('failed', 'Data tidak cukup, masukkan minimal 2 data nilai siswa');
-        }
-        // dd($this->nilai_preferensi);
     }
 
     //SAW
@@ -365,41 +414,4 @@ class HasilController extends Controller
             $this->nilai_preferensi[$i] = $this->jarak_terbobot_a_negatif[$i]/($this->jarak_terbobot_a_negatif[$i]+$this->jarak_terbobot_a_positif[$i]);
         }
     }
-
-    public function index(){
-        $this->main();
-        return view('konten.hasil perhitungan.index',[
-            'active' => 4,
-            'title' => 'Hasil Perhitungan',
-            'user' => Auth::user(),
-            'nilai_siswas' => NilaiSiswa::all(),
-            'hasil_perangkingan' => $this->hasil_perangkingan,
-            'normalisasi_matriks_r' => $this->normalisasi_matriks_r,
-            'normalisasi_matriks_terbobot_y' => $this->normalisasi_matriks_terbobot_y,
-            'solusi_ideal_positif' => $this->solusi_ideal_positif,
-            'solusi_ideal_negatif' => $this->solusi_ideal_negatif,
-            'jarak_terbobot_a_positif' => $this->jarak_terbobot_a_positif,
-            'jarak_terbobot_a_negatif' => $this->jarak_terbobot_a_negatif,
-            'nilai_preferensi' => $this->nilai_preferensi
-        ]);
-    }
-
-    public function print(){
-        $this->main();
-        return view('konten.hasil perhitungan.print',[
-            'active' => 4,
-            'title' => 'Cetak Hasil Perhitungan',
-            'user' => Auth::user(),
-            'nilai_siswas' => NilaiSiswa::all(),
-            'hasil_perangkingan' => $this->hasil_perangkingan,
-            'normalisasi_matriks_r' => $this->normalisasi_matriks_r,
-            'normalisasi_matriks_terbobot_y' => $this->normalisasi_matriks_terbobot_y,
-            'solusi_ideal_positif' => $this->solusi_ideal_positif,
-            'solusi_ideal_negatif' => $this->solusi_ideal_negatif,
-            'jarak_terbobot_a_positif' => $this->jarak_terbobot_a_positif,
-            'jarak_terbobot_a_negatif' => $this->jarak_terbobot_a_negatif,
-            'nilai_preferensi' => $this->nilai_preferensi
-        ]);
-    }
-    
 }

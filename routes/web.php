@@ -45,6 +45,9 @@ Route::group(['middleware' => ['auth','cekuser:admin']], function(){
     Route::delete('/nilaisiswa/{id}', [NilaiController::class, 'destroy'])->middleware('auth');
     Route::get('/nilaisiswa/{id}/edit', [NilaiController::class, 'edit'])->middleware('auth');
     Route::put('/nilaisiswa/{id}', [NilaiController::class, 'update'])->middleware('auth');
+    
+    //Post Kuota
+    Route::post('/hasilperhitungan', [HasilController::class, 'store'])->middleware('auth');
 });
 
 Route::group(['middleware' => ['auth','cekuser:admin,kepsek']], function(){
