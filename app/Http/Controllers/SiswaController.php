@@ -63,6 +63,8 @@ class SiswaController extends Controller
             ['alamat','=', $request->alamat]
         ];
 
+        dd($data_baru);
+
         $rules = [
             'nilai_siswa_id' => 'required',
             'nama' => 'required|min:3|max:255',

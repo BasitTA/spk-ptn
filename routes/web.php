@@ -46,6 +46,13 @@ Route::group(['middleware' => ['auth','cekuser:admin']], function(){
     Route::get('/nilaisiswa/{id}/edit', [NilaiController::class, 'edit'])->middleware('auth');
     Route::put('/nilaisiswa/{id}', [NilaiController::class, 'update'])->middleware('auth');
     
+    //Kriteria
+    Route::get('/kriteria/kriteriabaru', [KriteriaController::class, 'create'])->middleware('auth');
+    Route::post('/kriteria/kriteriabaru', [KriteriaController::class, 'store'])->middleware('auth');
+    Route::get('/kriteria/edit', [KriteriaController::class, 'edit'])->middleware('auth');
+    Route::put('/kriteria', [KriteriaController::class, 'update'])->middleware('auth');
+    // Route::get('/kriteria/{id}/edit', [KriteriaController::class, 'edit'])->middleware('auth');
+
     //Post Kuota
     Route::post('/hasilperhitungan', [HasilController::class, 'store'])->middleware('auth');
 });

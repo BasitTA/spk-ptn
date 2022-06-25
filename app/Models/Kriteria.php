@@ -9,7 +9,7 @@ class Kriteria extends Model{
 
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     protected $casts = [
         'pembobotan_kriteria' => 'array'

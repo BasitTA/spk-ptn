@@ -7,8 +7,25 @@
 @section('content')
     <div class="row col-lg-10 g-0 bg-light px-2 py-2">
         <div>
-            <div class="mx-2 my-2 border rounded-2 justify-content-center">
-                <h5 class="text-center my-2">Bobot Kriteria</h5>
+        {{-- Alert berhasil --}}
+        @if (session()->has('success'))
+            <div class="mx-2 alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+            <div class="mx-2 my-2 pb-3 border rounded-2">
+                <h5 class="mx-3 my-3">Data Kriteria</h5>
+                <div class="mx-3">
+                    <a class="align-self-center btn btn-sm btn-success" href="/kriteria/kriteriabaru"> <i class="bi bi-plus-lg"></i> Tambah</a>
+                    <a class="align-self-center btn btn-sm btn-warning" href="/kriteria/edit"><i class="bi bi-pencil"></i> Ubah</a>
+                </div>
+            </div>
+
+            <div class="mx-2 my-2 border rounded-2 justify-content-center align-middle">
+                <div class="my-2 d-flex justify-content-center">
+                    <h5 class="pe-2">Bobot Kriteria</h5>
+                </div>
                 <div class="mx-2 my-2">
                     {{-- <div class="mx-2 my-2 justify-content-end d-flex align-items-center">
                         <p class="my-0 mx-2 text-end text-success"><b>*Total = 1</b></p>
