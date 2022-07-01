@@ -58,7 +58,15 @@
                                     {{-- Jenis Kriteria --}}
                                     <div class="col-4">
                                         <label for="jenis" class="form-label">Jenis Kriteria</label>
-                                        <input value="{{ old('jenis.'.$a, $kriteria->jenis) }}" name="jenis[]" type="text" class="disabled form-control form-control-sm @error('jenis') is-invalid @enderror" id="jenis" required>
+                                
+                                        <select name="jenis[]" id="jenis" class="form-control form-control-sm @error('jenis') is-invalid @enderror" required>
+                                            <option hidden selected value="{{ old('jenis.'.$a, $kriteria->jenis) }}">{{ $kriteria->jenis }}</option>
+                                            @foreach($pilihan_jenis as $pj)
+                                                <option value="{{ old('jenis.'.$a, $pj) }}">{{ $pj }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        <!-- <input value="{{ old('jenis.'.$a, $kriteria->jenis) }}" name="jenis[]" type="text" class="disabled form-control form-control-sm @error('jenis') is-invalid @enderror" id="jenis" required> -->
                                         @error('jenis')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -108,7 +116,7 @@
                                         </div>
                                         {{-- Bobot Per Kriteria --}}
                                         <div class="col-4 mb-2">
-                                            <input value="{{ old('bobot.'.$b.'.'.$a, $pembobotan_kriteria['bobot']) }}" name="bobot[{{$b}}][]" type="text" class="disabled form-control form-control-sm @error('bobot') is-invalid @enderror" id="bobot" required>
+                                            <input value="{{ old('bobot.'.$b.'.'.$a, $pembobotan_kriteria['bobot']) }}" name="bobot[{{$b}}][]" type="text" class="form-control form-control-sm @error('bobot') is-invalid @enderror" id="bobot" readonly required>
                                             @error('bobot')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

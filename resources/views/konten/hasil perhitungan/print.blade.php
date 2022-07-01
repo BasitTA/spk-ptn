@@ -64,7 +64,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="mt-3 mx-3">*Data di atas merupakan data siswa yang dinyatakan lulus, jika ingin melihat hasil penilaian lebih lanjut harap konfirmasi ke admin</div>
+                    <div class="mt-3 mx-3">*Data di atas merupakan data siswa yang dinyatakan lulus, jika ingin melihat hasil penilaian lebih lanjut dapat menghubungi admin</div>
                 </div>
             </div>    
         @else

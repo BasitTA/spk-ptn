@@ -62,6 +62,7 @@ class HasilController extends Controller
             'user' => Auth::user(),
             'kuota' => Kuota::all(),
             'nilai_siswas' => NilaiSiswa::all(),
+            'jml_kriteria' => count(Kriteria::all()),
             'hasil_perangkingan' => $this->hasil_perangkingan,
             'normalisasi_matriks_r' => $this->normalisasi_matriks_r,
             'normalisasi_matriks_terbobot_y' => $this->normalisasi_matriks_terbobot_y,
@@ -164,26 +165,23 @@ class HasilController extends Controller
     private function hitungMaxX(){
         //p = pilihan
         $p1 = $p2 = $p3 = $p4 = $p5 = $p6 = array();
+        
+        //Jajal dynamic hitung max x
+        $pilihan = array(array());
+        $jml_kriteria = count(Kriteria::all());
+        $nilai_siswa = $this->nilai_siswa;
+        $max_x = array();
 
         if($this->nilai_siswa->count()>1){
-            // dd($this->nilai_siswa->count());
+            // dd($this->nilai_siswa[0]['pilihan'][0],$this->nilai_siswa[1]['pilihan'][0]);
             foreach($this->nilai_siswa as $ns){
-                $p1[] = $ns['pilihan'][0];
-                $p2[] = $ns['pilihan'][1];
-                $p3[] = $ns['pilihan'][2];
-                $p4[] = $ns['pilihan'][3];
-                $p5[] = $ns['pilihan'][4];
-                $p6[] = $ns['pilihan'][5];
+                for($i=0;$i<$jml_kriteria;$i++){
+                    $pilihan[$i][] = $ns['pilihan'][$i];
+                    $max_x[$i] = max($pilihan[$i]);
+                }
             };
 
-            $this->maxX = [
-                max($p1),
-                max($p2),
-                max($p3),
-                max($p4),
-                max($p5),
-                max($p6)
-            ];
+            $this->maxX = $max_x;
             // dd($this->maxX);
         }else {
             // dd('Data tidak cukup, masukkan minimal 2 data nilai siswa');

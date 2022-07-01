@@ -39,7 +39,7 @@
                     <div class="form-group">
                         @foreach ($kriteria['pembobotan_kriteria'] as $pembobotan)
                             <div class="ms-3 form-check form-check-inline">
-                                <input name="{{ $kriteria->kode }}" id="{{ $kriteria->kode }}" class="form-check-input" type="radio" value="{{ $pembobotan['bobot'] }}" {{ old('$kriteria->kode', $nilai_siswa['pilihan'][($kriteria->id)-1]) == $pembobotan['bobot'] ? 'checked' : ''}} required>
+                                <input name="kriteria[{{ $kriteria->id }}]" id="{{ $kriteria->kode}}" class="form-check-input" type="radio" value="{{ $pembobotan['bobot']}}" {{ old('$kriteria->kode', $nilai_siswa['pilihan'][($kriteria->id)-1] ?? null) == $pembobotan['bobot'] ? 'checked' : ''}} required>
                                 <label class="form-check-label" for="{{ $kriteria->kode }}">{{ $pembobotan['pilihan'] }}</label>
                             </div>
                         @endforeach

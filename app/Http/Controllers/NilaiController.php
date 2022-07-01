@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Auth;
 class NilaiController extends Controller
 {
     public function index(){
+        // dd(Kriteria::all()->count());
         return view('konten.siswa.nilai.index',[
             'active' => 2,
             'title' => 'Nilai Siswa',
             'user' => Auth::user(),
             'siswas' => Siswa::latest()->get(),
+            'kriteria' => Kriteria::all()->count(),
             'nilai_siswas' => NilaiSiswa::latest()->filter(request(['search']))->get()
         ]);
     }
@@ -31,11 +33,21 @@ class NilaiController extends Controller
     }
     
     public function store(Request $request){
+        $kriterias = Kriteria::all();
         $nilai_siswa_id = $request->nilai_siswa_id;
-        $pilihan = "$request->C1, $request->C2, 
-        $request->C3, $request->C4, 
-        $request->C5, $request->C6";
-        $int_pilihan = array_map('intval', explode(',',$pilihan));
+
+        foreach($kriterias as $k){
+            $pilihan[] = (int)$request->kriteria[$k->id];
+        }
+        // dd ($request->kriteria[$k->id]);
+        // $pilihan = "";
+        // $pilihan = "$request->C1, $request->C2, 
+        // $request->C3, $request->C4, 
+        // $request->C5, $request->C6";
+        // $pilihan = "7, 1, 2, 3";
+        // dd($pilihan);
+        // $int_pilihan = array_map('intval', explode(',',$pilihan));
+        // dd($int_pilihan);
         $nama = Siswa::where('nilai_siswa_id', $nilai_siswa_id)->first()->nama;
         
         //Memvalidasi data baru yg diisi (apakah data sudah ada sebelumnya)
@@ -47,7 +59,7 @@ class NilaiController extends Controller
             NilaiSiswa::create([
                 'id' => $nilai_siswa_id,
                 'nama' => $nama,
-                'pilihan' => $int_pilihan
+                'pilihan' => $pilihan
             ]);
             return redirect('/nilaisiswa')->with('success', 'Data baru berhasil ditambahkan');
         }
@@ -60,7 +72,8 @@ class NilaiController extends Controller
 
     public function edit(NilaiSiswa $id){
         $tanggal_lahir = Siswa::where('nilai_siswa_id',$id->id)->first()->tanggal_lahir;
-
+        // dd($id);
+        // dd(count($id['pilihan']));
         return view('konten.siswa.nilai.edit',[
             'active' => 2,
             'title' => 'Ubah Nilai Siswa',
@@ -73,19 +86,23 @@ class NilaiController extends Controller
     }
 
     public function update(Request $request){
+        
+        $kriterias = Kriteria::all();
+        // dd($request);
+        foreach($kriterias as $k){
+            $pilihan[] = (int)$request->kriteria[$k->id];
+        }
         $id = $request->id;
         $nama = $request->nama;
-        $pilihan = "$request->C1, $request->C2, 
-        $request->C3, $request->C4, 
-        $request->C5, $request->C6";
+        // dd($pilihan);
 
         //Ubah string ke bentuk integer
-        $int_pilihan = array_map('intval', explode(',',$pilihan));
+        // $int_pilihan = array_map('intval', explode(',',$pilihan));
 
         NilaiSiswa::where('id', $id)->update([
             'id' => $id,
             'nama' => $nama,
-            'pilihan' => $int_pilihan
+            'pilihan' => $pilihan
         ]);
 
         return redirect('/nilaisiswa')->with('success', 'Data berhasil diupdate');

@@ -46,12 +46,9 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nama Siswa</th>
-                                <th scope="col">C1</th>
-                                <th scope="col">C2</th>
-                                <th scope="col">C3</th>
-                                <th scope="col">C4</th>
-                                <th scope="col">C5</th>
-                                <th scope="col">C6</th>
+                                @for($i=1;$i<=$kriteria;$i++)
+                                    <th scope="col">C{{$i}}</th>
+                                @endfor
                                 {{-- ADMIN ONLY --}}
                                 @if (auth()->user()->level=="admin")
                                     <th scope="col">Aksi</th>
@@ -59,12 +56,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($nilai_siswas as $ns)
+                            @foreach($nilai_siswas as $ns)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $ns->nama }}</td>
                                     @foreach ($ns->pilihan as $pilihan)
-                                        <td>{{ $pilihan }}</td>
+                                        <td>{{ $pilihan}}</td>
                                     @endforeach
                                     {{-- ADMIN ONLY --}}
                                     @if (auth()->user()->level=="admin")

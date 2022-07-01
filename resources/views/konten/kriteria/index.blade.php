@@ -17,7 +17,7 @@
             <div class="mx-2 my-2 pb-3 border rounded-2">
                 <h5 class="mx-3 my-3">Data Kriteria</h5>
                 <div class="mx-3">
-                    <a class="align-self-center btn btn-sm btn-success" href="/kriteria/kriteriabaru"> <i class="bi bi-plus-lg"></i> Tambah</a>
+                    <a class="align-self-center btn btn-sm btn-success" onclick="return confirm('Jika terjadi penambahan data kriteria, maka nilai siswa harus diinputkan kembali.')" href="/kriteria/kriteriabaru"> <i class="bi bi-plus-lg"></i> Tambah</a>
                     <a class="align-self-center btn btn-sm btn-warning" href="/kriteria/edit"><i class="bi bi-pencil"></i> Ubah</a>
                 </div>
             </div>

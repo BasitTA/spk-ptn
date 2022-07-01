@@ -48,7 +48,7 @@
                         <div class="form-group">
                             @foreach ($kriteria['pembobotan_kriteria'] as $pembobotan)
                                 <div class="ms-3 form-check form-check-inline">
-                                    <input name="{{ $kriteria->kode }}" id="kriteria" class="form-check-input @error('{{ $kriteria->kode }}') is-invalid @enderror" type="radio" value="{{ $pembobotan['bobot'] }}" required>
+                                    <input name="kriteria[{{{ $kriteria->id }}}]" id="kriteria" class="form-check-input @error('{{ $kriteria->kode }}') is-invalid @enderror" type="radio" value="{{ $pembobotan['bobot'] }}" required>
                                     <label class="form-check-label" for="{{ $kriteria->kode }}">{{ $pembobotan['pilihan'] }}</label>
                                 </div>
                                 @error('{{ $kriteria->kode }}')

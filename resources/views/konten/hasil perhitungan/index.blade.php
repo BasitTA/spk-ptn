@@ -157,12 +157,9 @@
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Nama</th>
-                                        <th scope="col">C1</th>
-                                        <th scope="col">C2</th>
-                                        <th scope="col">C3</th>
-                                        <th scope="col">C4</th>
-                                        <th scope="col">C5</th>
-                                        <th scope="col">C6</th>
+                                        @for($i=1;$i<=$jml_kriteria;$i++)
+                                            <th scope="col">C{{$i}}</th>
+                                        @endfor
                                     </tr>
                                 </thead>
                                 <tbody>
