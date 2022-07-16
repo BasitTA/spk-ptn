@@ -49,41 +49,6 @@ class KriteriaController extends Controller
         ]);
     }
 
-    // public function store(Request $request){
-    //     $pembobotan_kriteria = [
-    //         ['pilihan'=>$request->pilihan, //Contoh: Nilai 80-100, 70-78, 60-69, <60
-    //          'bobot'=>$request->bobot], //Contoh: 4, 3, 2, 1
-    //         // [$request->pilihan1, $request->bobot],
-    //     ];
-
-    //     $data_baru = [
-    //         // ['id','=', $request->id],
-    //         ['kode','=', $request->kode],
-    //         ['nama','=', $request->nama],
-    //         ['jenis','=', $request->jenis],
-    //         ['bobot_kriteria','=', $request->bobot_kriteria],
-    //         ['pembobotan_kriteria','=', $pembobotan_kriteria]
-    //     ];
-
-    //     $kriteria = [
-    //         'kode' => $request->kode,
-    //         'nama' => $request->nama,
-    //         'jenis' => $request->jenis,
-    //         'bobot_kriteria' => $request->bobot_kriteria,
-    //         'pembobotan_kriteria' => $pembobotan_kriteria,
-    //     ];
-
-    //     //Memvalidasi data baru yg diisi (apakah data sudah ada sebelumnya)
-    //     $data_exist = Kriteria::where($data_baru)->exists(); 
-
-    //     if($data_exist){
-    //         return back()->withInput()->with('failed', 'Data sudah ada, silahkan input data yang berbeda!');
-    //     }else {
-    //         Kriteria::create($kriteria);
-    //         return redirect('/kriteria')->with('success', 'Data baru berhasil ditambahkan');
-    //     }
-    // }
-
     public function store(Request $request){
         $kriterias = Kriteria::all();
         $jml_pembobotan_kriteria=4;

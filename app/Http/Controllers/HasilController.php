@@ -163,21 +163,16 @@ class HasilController extends Controller
 
     //SAW
     private function hitungMaxX(){
-        //p = pilihan
-        $p1 = $p2 = $p3 = $p4 = $p5 = $p6 = array();
-        
-        //Jajal dynamic hitung max x
-        $pilihan = array(array());
+        //Array dynamic hitung max x
+        $pilihan_by_id = array(array());
         $jml_kriteria = count(Kriteria::all());
-        $nilai_siswa = $this->nilai_siswa;
         $max_x = array();
 
         if($this->nilai_siswa->count()>1){
-            // dd($this->nilai_siswa[0]['pilihan'][0],$this->nilai_siswa[1]['pilihan'][0]);
             foreach($this->nilai_siswa as $ns){
                 for($i=0;$i<$jml_kriteria;$i++){
-                    $pilihan[$i][] = $ns['pilihan'][$i];
-                    $max_x[$i] = max($pilihan[$i]);
+                    $pilihan_by_id[$i][] = $ns['pilihan'][$i];
+                    $max_x[$i] = max($pilihan_by_id[$i]);
                 }
             };
 
@@ -189,28 +184,20 @@ class HasilController extends Controller
     }
 
     private function hitungMinX(){
-        //p = pilihan
-        $p1 = $p2 = $p3 = $p4 = $p5 = $p6 = array();
+        //Array dynamic hitung max x
+        $pilihan_by_id = array(array());
+        $jml_kriteria = count(Kriteria::all());
+        $min_x = array();
 
         if($this->nilai_siswa->count()>1){
-            // dd($this->nilai_siswa->count());
             foreach($this->nilai_siswa as $ns){
-                $p1[] = $ns['pilihan'][0];
-                $p2[] = $ns['pilihan'][1];
-                $p3[] = $ns['pilihan'][2];
-                $p4[] = $ns['pilihan'][3];
-                $p5[] = $ns['pilihan'][4];
-                $p6[] = $ns['pilihan'][5];
+                for($i=0;$i<$jml_kriteria;$i++){
+                    $pilihan_by_id[$i][] = $ns['pilihan'][$i];
+                    $min_x[$i] = min($pilihan_by_id[$i]);
+                }
             };
 
-            $this->minX = [
-                min($p1),
-                min($p2),
-                min($p3),
-                min($p4),
-                min($p5),
-                min($p6)
-            ];
+            $this->minX = $min_x;
             // dd($this->minX);
         }else {
             // dd('Data tidak cukup, masukkan minimal 2 data nilai siswa');
@@ -218,48 +205,53 @@ class HasilController extends Controller
     }
 
     private function normalisasiMatriksR(){
-        $normalisasi_matriks_r1 = $normalisasi_matriks_r2= $normalisasi_matriks_r3= $normalisasi_matriks_r4= $normalisasi_matriks_r5= $normalisasi_matriks_r6 = array();
-    
-        // dd($this->maxX);
-        if($this->nilai_siswa->count()>1){
-            // dd($this->nilai_siswa->count());
+        $jml_kriteria = count(Kriteria::all());
+        $jml_nilai_siswa = count(NilaiSiswa::all());
+        $kriteria = Kriteria::all()->toArray();
+
+        $pilihan_by_id = array(array());
+        $normalisasi_matriks_r = array(array());
+
+        $pilihan_benefit = array();
+        $benefit = 'Benefit';
+        
+        $pilihan_cost = array();
+        $cost = 'Cost';
+
+        if($this->nilai_siswa->count()>1){  
             foreach($this->nilai_siswa as $ns){
-                $kriteria1[] = $ns['pilihan'][0];
-                $kriteria2[] = $ns['pilihan'][1];
-                $kriteria3[] = $ns['pilihan'][2];
-                $kriteria4[] = $ns['pilihan'][3];
-                $kriteria5[] = $ns['pilihan'][4];
-                $kriteria6[] = $ns['pilihan'][5];
-            };
-            // dd($kriteria1);
-
-            foreach($kriteria1 as $k1){
-                $normalisasi_matriks_r1[] = $k1/$this->maxX[0];
-            }
-            foreach($kriteria2 as $k2){
-                $normalisasi_matriks_r2[] = $k2/$this->maxX[1];
-            }
-            foreach($kriteria3 as $k3){
-                $normalisasi_matriks_r3[] = $k3/$this->maxX[2];
-            }
-            foreach($kriteria4 as $k4){
-                $normalisasi_matriks_r4[] = $k4/$this->maxX[3];
-            }
-            foreach($kriteria5 as $k5){
-                $normalisasi_matriks_r5[] = $this->minX[4]/$k5;
-            }
-            foreach($kriteria6 as $k6){
-                $normalisasi_matriks_r6[] = $k6/$this->maxX[5];
+                for($i=0;$i<$jml_kriteria;$i++){
+                    $pilihan_by_id[$i][] = $ns['pilihan'][$i];
+                }
             }
 
-            $this->normalisasi_matriks_r = [
-                $normalisasi_matriks_r1,
-                $normalisasi_matriks_r2,
-                $normalisasi_matriks_r3,
-                $normalisasi_matriks_r4,
-                $normalisasi_matriks_r5,
-                $normalisasi_matriks_r6
-            ];
+            for($p=0;$p<$jml_kriteria;$p++){
+                if($kriteria[$p]['jenis']=="Benefit"){
+                    $pilihan_benefit[$p] = $pilihan_by_id[$p];
+                }
+            }
+            for($p=0;$p<$jml_kriteria;$p++){
+                if($kriteria[$p]['jenis']=="Cost"){
+                    $pilihan_cost[$p] = $pilihan_by_id[$p];
+                }
+            }
+
+            $b = 0;
+            $c = 0;
+            foreach($pilihan_benefit as $key=>$value){
+                for($j=0;$j<$jml_nilai_siswa;$j++){
+                    $normalisasi_matriks_r[$key][$j] = $pilihan_by_id[$key][$j]/$this->maxX[$key];
+                    $b++;
+                }
+            }
+            foreach($pilihan_cost as $key=>$value){
+                for($j=0;$j<$jml_nilai_siswa;$j++){
+                    $normalisasi_matriks_r[$key][$j] = $this->minX[$key]/$pilihan_by_id[$key][$j];
+                    $c++;
+                }
+            }
+            ksort($normalisasi_matriks_r);
+            $this->normalisasi_matriks_r = $normalisasi_matriks_r;
             // dd($this->normalisasi_matriks_r);
         }else {
             echo('Data tidak cukup, masukkan minimal 2 data nilai siswa');
@@ -268,107 +260,49 @@ class HasilController extends Controller
 
     //TOPSIS
     private function normalisasiMatriksTerbobotY(){
+        // dd($this->kriteria);
+        $jml_kriteria = count(Kriteria::all());
+        $jml_nilai_siswa = count(NilaiSiswa::all());
+        $normalisasi_matriks_r = $this->normalisasi_matriks_r;
+        // dd($normalisasi_matriks_r);
 
-        $normalisasi_matriks_terbobot_y1 = $normalisasi_matriks_terbobot_y2 = $normalisasi_matriks_terbobot_y3 = $normalisasi_matriks_terbobot_y4 = $normalisasi_matriks_terbobot_y5 = $normalisasi_matriks_terbobot_y6 = array();
-        $bobot = [
-            $this->kriteria[0]->bobot_kriteria,
-            $this->kriteria[1]->bobot_kriteria,
-            $this->kriteria[2]->bobot_kriteria,
-            $this->kriteria[3]->bobot_kriteria,
-            $this->kriteria[4]->bobot_kriteria,
-            $this->kriteria[5]->bobot_kriteria,
-        ];
-
-        $normalisasi_matriks_r1 = $this->normalisasi_matriks_r[0];
-        $normalisasi_matriks_r2 = $this->normalisasi_matriks_r[1];
-        $normalisasi_matriks_r3 = $this->normalisasi_matriks_r[2];
-        $normalisasi_matriks_r4 = $this->normalisasi_matriks_r[3];
-        $normalisasi_matriks_r5 = $this->normalisasi_matriks_r[4];
-        $normalisasi_matriks_r6 = $this->normalisasi_matriks_r[5];
-        
         if($this->nilai_siswa->count()>1){
-            foreach($normalisasi_matriks_r1 as $normalisasi_matriks_r1){
-                $normalisasi_matriks_terbobot_y1[] = $normalisasi_matriks_r1*$bobot[0];
+            for($i=0;$i<$jml_kriteria;$i++){
+                $bobot[$i] = $this->kriteria[$i]->bobot_kriteria;
             }
-            foreach($normalisasi_matriks_r2 as $normalisasi_matriks_r2){
-                $normalisasi_matriks_terbobot_y2[] = $normalisasi_matriks_r2*$bobot[1];
+            for($i=0;$i<$jml_kriteria;$i++){
+                for($j=0;$j<$jml_nilai_siswa;$j++){
+                    $normalisasi_matriks_terbobot_y[$i][$j] = $normalisasi_matriks_r[$i][$j]*$bobot[$i];
+                }
             }
-            foreach($normalisasi_matriks_r3 as $normalisasi_matriks_r3){
-                $normalisasi_matriks_terbobot_y3[] = $normalisasi_matriks_r3*$bobot[2];
-            }
-            foreach($normalisasi_matriks_r4 as $normalisasi_matriks_r4){
-                $normalisasi_matriks_terbobot_y4[] = $normalisasi_matriks_r4*$bobot[3];
-            }
-            foreach($normalisasi_matriks_r5 as $normalisasi_matriks_r5){
-                $normalisasi_matriks_terbobot_y5[] = $normalisasi_matriks_r5*$bobot[4];
-            }
-            foreach($normalisasi_matriks_r6 as $normalisasi_matriks_r6){
-                $normalisasi_matriks_terbobot_y6[] = $normalisasi_matriks_r6*$bobot[5];
-            }
-
-            $this->normalisasi_matriks_terbobot_y = [
-                $normalisasi_matriks_terbobot_y1,
-                $normalisasi_matriks_terbobot_y2,
-                $normalisasi_matriks_terbobot_y3,
-                $normalisasi_matriks_terbobot_y4,
-                $normalisasi_matriks_terbobot_y5,
-                $normalisasi_matriks_terbobot_y6,
-            ];
         }
-            // dd($this->normalisasi_matriks_terbobot_y);
+
+        $this->normalisasi_matriks_terbobot_y = $normalisasi_matriks_terbobot_y;
     }
 
     private function hitungSolusiIdealPositif(){
-        $solusi_ideal_positif1 = $solusi_ideal_positif2 = $solusi_ideal_positif3 = $solusi_ideal_positif4 = $solusi_ideal_positif5 = $solusi_ideal_positif6 = array();
         $solusi_ideal_positif = array();
+        $jml_kriteria = count(Kriteria::all());
 
         if($this->nilai_siswa->count()>1){
-
-            $solusi_ideal_positif1 = max($this->normalisasi_matriks_terbobot_y[0]);
-            $solusi_ideal_positif2 = max($this->normalisasi_matriks_terbobot_y[1]);
-            $solusi_ideal_positif3 = max($this->normalisasi_matriks_terbobot_y[2]);
-            $solusi_ideal_positif4 = max($this->normalisasi_matriks_terbobot_y[3]);
-            $solusi_ideal_positif5 = max($this->normalisasi_matriks_terbobot_y[4]);
-            $solusi_ideal_positif6 = max($this->normalisasi_matriks_terbobot_y[5]);
-
-            $this->solusi_ideal_positif = [
-                $solusi_ideal_positif1,
-                $solusi_ideal_positif2,
-                $solusi_ideal_positif3,
-                $solusi_ideal_positif4,
-                $solusi_ideal_positif5,
-                $solusi_ideal_positif6,
-            ];
-
-            // dd($this->solusi_ideal_positif);
+            for($i=0;$i<$jml_kriteria;$i++){
+                $solusi_ideal_positif[$i] = max($this->normalisasi_matriks_terbobot_y[$i]);
+            }
+            $this->solusi_ideal_positif = $solusi_ideal_positif;
         }else {
             echo('Data tidak cukup, masukkan minimal 2 data nilai siswa');
         }
     }
 
     private function hitungSolusiIdealNegatif(){
-        $solusi_ideal_negatif1 = $solusi_ideal_negatif2 = $solusi_ideal_negatif3 = $solusi_ideal_negatif4 = $solusi_ideal_negatif5 = $solusi_ideal_negatif6 = array();
         $solusi_ideal_negatif = array();
+        $jml_kriteria = count(Kriteria::all());
 
         if($this->nilai_siswa->count()>1){
-
-            $solusi_ideal_negatif1 = min($this->normalisasi_matriks_terbobot_y[0]);
-            $solusi_ideal_negatif2 = min($this->normalisasi_matriks_terbobot_y[1]);
-            $solusi_ideal_negatif3 = min($this->normalisasi_matriks_terbobot_y[2]);
-            $solusi_ideal_negatif4 = min($this->normalisasi_matriks_terbobot_y[3]);
-            $solusi_ideal_negatif5 = min($this->normalisasi_matriks_terbobot_y[4]);
-            $solusi_ideal_negatif6 = min($this->normalisasi_matriks_terbobot_y[5]);
-
-            $this->solusi_ideal_negatif = [
-                $solusi_ideal_negatif1,
-                $solusi_ideal_negatif2,
-                $solusi_ideal_negatif3,
-                $solusi_ideal_negatif4,
-                $solusi_ideal_negatif5,
-                $solusi_ideal_negatif6,
-            ];
-
-            // dd($this->solusi_ideal_negatif);
+            for($i=0;$i<$jml_kriteria;$i++){
+                $solusi_ideal_negatif[$i] = min($this->normalisasi_matriks_terbobot_y[$i]);
+            }
+            $this->solusi_ideal_negatif = $solusi_ideal_negatif;
         }else {
             echo('Data tidak cukup, masukkan minimal 2 data nilai siswa');
         }
@@ -377,34 +311,29 @@ class HasilController extends Controller
     private function hitungJarakTerbobotAPositif(){
         $normalisasi_matriks_terbobot_y = $this->normalisasi_matriks_terbobot_y;
         $solusi_ideal_positif = $this->solusi_ideal_positif;
-        // $jarak_terbobot_a_positif1 = $jarak_terbobot_a_positif2 =$jarak_terbobot_a_positif3 = $jarak_terbobot_a_positif4 = $jarak_terbobot_a_positif5 = $jarak_terbobot_a_positif6 = null;
         
-        // dd($normalisasi_matriks_terbobot_y, $solusi_ideal_positif);
         for ($i=0; $i < $this->nilai_siswa->count(); $i++) {
-            $this->jarak_terbobot_a_positif[] = sqrt(pow(($solusi_ideal_positif[0]-$normalisasi_matriks_terbobot_y[0][$i]),2)+
-            pow(($solusi_ideal_positif[1]-$normalisasi_matriks_terbobot_y[1][$i]),2)+
-            pow(($solusi_ideal_positif[2]-$normalisasi_matriks_terbobot_y[2][$i]),2)+
-            pow(($solusi_ideal_positif[3]-$normalisasi_matriks_terbobot_y[3][$i]),2)+
-            pow(($solusi_ideal_positif[4]-$normalisasi_matriks_terbobot_y[4][$i]),2)+
-            pow(($solusi_ideal_positif[5]-$normalisasi_matriks_terbobot_y[5][$i]),2));
+            $total_kuadrat = 0;
+            for($j=0;$j<count($solusi_ideal_positif);$j++){
+                $total_kuadrat += pow(($solusi_ideal_positif[$j]-$normalisasi_matriks_terbobot_y[$j][$i]),2);
+            }
+            $this->jarak_terbobot_a_positif[]= sqrt($total_kuadrat);
         }
         // dd($this->jarak_terbobot_a_positif);
     }
+
     
     private function hitungJarakTerbobotANegatif(){
         $normalisasi_matriks_terbobot_y = $this->normalisasi_matriks_terbobot_y;
         $solusi_ideal_negatif = $this->solusi_ideal_negatif;
-
-        for ($i=0; $i < $this->nilai_siswa->count(); $i++) {     
-            $this->jarak_terbobot_a_negatif[] = sqrt(pow(($normalisasi_matriks_terbobot_y[0][$i]-$solusi_ideal_negatif[0]),2)+
-            pow(($normalisasi_matriks_terbobot_y[1][$i]-$solusi_ideal_negatif[1]),2)+
-            pow(($normalisasi_matriks_terbobot_y[2][$i]-$solusi_ideal_negatif[2]),2)+
-            pow(($normalisasi_matriks_terbobot_y[3][$i]-$solusi_ideal_negatif[3]),2)+
-            pow(($normalisasi_matriks_terbobot_y[4][$i]-$solusi_ideal_negatif[4]),2)+
-            pow(($normalisasi_matriks_terbobot_y[5][$i]-$solusi_ideal_negatif[5]),2));
+        
+        for ($i=0; $i < $this->nilai_siswa->count(); $i++) {
+            $total_kuadrat = 0;
+            for($j=0;$j<count($solusi_ideal_negatif);$j++){
+                $total_kuadrat += pow(($normalisasi_matriks_terbobot_y[$j][$i])-$solusi_ideal_negatif[$j],2);
+            }
+            $this->jarak_terbobot_a_negatif[]= sqrt($total_kuadrat);
         }
-
-        // dd($this->jarak_terbobot_a_negatif);
     }
 
     private function hitungNilaiPreferensi(){
