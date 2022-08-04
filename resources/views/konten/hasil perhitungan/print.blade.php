@@ -33,7 +33,7 @@
             </div>
         @endif
     
-        @if($kuota[0]->kuota > 0)
+        @if(count($kuota)>0)
             {{-- Nilai Preferensi (Ranking) --}}
             <div class="bg-white">
                 <div class="pt-3">
